@@ -71,13 +71,36 @@ window.onload = function(){
 
 		ctx.fillStyle = "white";
 
+		// the ball
 		ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 
-		ctx.fillStyle = "blue";
+		// paddle 1
+		ctx.fillStyle = "red";
 		ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
 
-		ctx.fillStyle = "red";
+		// paddle 2
+		ctx.fillStyle = "blue";
 		ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
+
+		// dashed middle line
+		ctx.fillStyle = "white";
+		ctx.fillRect(150,0,5,5);
+		ctx.fillRect(150,10,5,5);
+		ctx.fillRect(150,20,5,5);
+		ctx.fillRect(150,30,5,5);
+		ctx.fillRect(150,40,5,5);
+		ctx.fillRect(150,50,5,5);
+		ctx.fillRect(150,60,5,5);
+		ctx.fillRect(150,70,5,5);
+		ctx.fillRect(150,80,5,5);
+		ctx.fillRect(150,90,5,5);
+		ctx.fillRect(150,100,5,5);
+		ctx.fillRect(150,110,5,5);
+		ctx.fillRect(150,120,5,5);
+		ctx.fillRect(150,130,5,5);
+		ctx.fillRect(150,140,5,5);
+		ctx.fillRect(150,149,5,5);
+
 		
 		setTimeout(actionPerformed,10);
 	}
