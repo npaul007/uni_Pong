@@ -1,20 +1,4 @@
-
-
-
 window.onload = function(){
-
-	function Paddle(x,y,xVel,yVel){
-		this.x = x;
-		this.y = y;
-		this.width = 10;
-		this.height = 30;
-		this.xVel = xVel;
-		this.yVel = yVel;
-		this.animate = function(){
-			this.x+=this.xVel;
-			this.y+=this.yVel;
-		}
-	}
 
 	function Ball(x,y,width,height,xVel,yVel){
 		this.x = x;
@@ -46,6 +30,18 @@ window.onload = function(){
 		}
 	}
 
+	function Paddle(x,y,xVel,yVel){
+		this.x = x;
+		this.y = y;
+		this.width = 10;
+		this.height = 30;
+		this.xVel = xVel;
+		this.yVel = yVel;
+		this.animate = function(){
+			this.x+=this.xVel;
+			this.y+=this.yVel;
+		}
+	}
 
 	var ball = new Ball(120,50,10,5,2,1);
 	var p1 = new Paddle(10,60,0,0);
@@ -56,15 +52,23 @@ window.onload = function(){
 		var ctx = canvas.getContext('2d');
 
 		ball.animate();
+		
 		p1.animate();
 		p2.animate();
+
 		ball.collision();
 
+		p1Collsion();
+		p2Collsion();
+
 		ctx.clearRect(0,0,canvas.width,canvas.height);
+
 		ctx.fillStyle = "red";
 		ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
+
 		ctx.fillStyle = "purple";
 		ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
+
 		ctx.fillStyle = "green";
 		ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
 		
@@ -72,6 +76,22 @@ window.onload = function(){
 	}
 
 	setTimeout(actionPerformed,5);
+
+	function p1Collsion(){
+		if(ball.x < p1.x){
+			if(ball.y >= p1.y && ball.y <= p1.height+p1.y){
+				ball.xVel *= -1;
+			}
+		}
+	}
+
+	function p2Collsion(){
+		if(ball.x > p2.x){
+			if(ball.y >= p2.y && ball.y <= p2.height+p2.y){
+				ball.xVel *= -1;
+			}
+		}
+	}
 
 	document.onkeydown = function(event){
 		switch(event.keyCode){
