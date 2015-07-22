@@ -43,16 +43,22 @@ window.onload = function(){
 		}
 	}
 
-	var ball = new Ball(120,50,10,5,2,1);
+	var ball = new Ball(120,50,10,5,3,1);
 	var p1 = new Paddle(10,60,0,0);
 	var p2 = new Paddle(280,60,0,0);
+
+	var p1Up = false;
+	var p1Down = false;
+
+	var p2Up = false;
+	var p2Down = false;
 
 	function actionPerformed(){
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
 
 		ball.animate();
-		
+
 		p1.animate();
 		p2.animate();
 
@@ -63,23 +69,29 @@ window.onload = function(){
 
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 
-		ctx.fillStyle = "red";
+		ctx.fillStyle = "white";
+
 		ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 
-		ctx.fillStyle = "purple";
+		ctx.fillStyle = "blue";
 		ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
 
-		ctx.fillStyle = "green";
+		ctx.fillStyle = "red";
 		ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
 		
-		setTimeout(actionPerformed,5);
+		setTimeout(actionPerformed,10);
 	}
 
-	setTimeout(actionPerformed,5);
+	setTimeout(actionPerformed,10);
 
 	function p1Collsion(){
 		if(ball.x < p1.x){
 			if(ball.y >= p1.y && ball.y <= p1.height+p1.y){
+				if(p1Up){
+					ball.yVel = -1;
+				}else if(p1Down){
+					ball.yVel = 1;
+				}
 				ball.xVel *= -1;
 			}
 		}
@@ -88,6 +100,11 @@ window.onload = function(){
 	function p2Collsion(){
 		if(ball.x > p2.x){
 			if(ball.y >= p2.y && ball.y <= p2.height+p2.y){
+				if(p2Up){
+					ball.yVel = -1;
+				}else if(p2Down){
+					ball.yVel = 1;
+				}
 				ball.xVel *= -1;
 			}
 		}
@@ -97,19 +114,35 @@ window.onload = function(){
 		switch(event.keyCode){
 			// w key
 			case 87:
-				p1.yVel = -1
+				p1Up = true;
+				if(p1Down){
+					p1Down = false;
+				}
+				p1.yVel = -2
 			break;
 			// s key
 			case 83:
-				p1.yVel = 1
+				p1Down = true;
+				if(p1Up){
+					p1Up = false;
+				}
+				p1.yVel = 2
 			break;
 			// up arrow
 			case 38:
-				p2.yVel = -1;
+				p2Up = true;
+				if(p2Down){
+					p2Down = false;
+				}
+				p2.yVel = -2;
 			break;
 			// down arrow
 			case 40:
-				p2.yVel = 1;
+				p2Down = true;
+				if(p2Up){
+					p2Up = false;
+				}
+				p2.yVel = 2;
 			break;
 		}
 	}
