@@ -2,6 +2,23 @@ window.onload = function(){
 
 	var game = true;
 
+	var ball = new Ball(120,50,10,5,3,1);
+	var p1 = new Paddle(10,60,0,0);
+	var p2 = new Paddle(280,60,0,0);
+
+	var p1Up = false;
+	var p1Down = false;
+
+	var p2Up = false;
+	var p2Down = false;
+
+	var p1Score = 0;
+	var p2Score = 0;
+
+	var text;
+
+	setTimeout(actionPerformed,10);
+
 	function restart(){
 		p1.y = 60;
 		p1.y = 60;
@@ -58,20 +75,7 @@ window.onload = function(){
 		}
 	}
 
-	var ball = new Ball(120,50,10,5,3,1);
-	var p1 = new Paddle(10,60,0,0);
-	var p2 = new Paddle(280,60,0,0);
 
-	var p1Up = false;
-	var p1Down = false;
-
-	var p2Up = false;
-	var p2Down = false;
-
-	var p1Score = 0;
-	var p2Score = 0;
-
-	var text;
 
 	function checkScore(){
 		if(p1Score == 10 || p2Score == 10){
@@ -154,10 +158,7 @@ window.onload = function(){
 		
 		setTimeout(actionPerformed,10);
 	}
-
-	setTimeout(actionPerformed,10);
 	
-
 	function p1Collsion(){
 		if(ball.x < p1.x){
 			if(ball.y >= p1.y && ball.y <= p1.height+p1.y){
