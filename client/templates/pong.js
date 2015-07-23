@@ -1,5 +1,16 @@
 window.onload = function(){
 
+	var game = true;
+
+	function restart(){
+		p1.y = 60;
+		p1.y = 60;
+		p2.y = 60;
+		p2.y = 60;
+		ball.x = 120;
+		ball.y = 50;
+	}
+
 	function Ball(x,y,width,height,xVel,yVel){
 		this.x = x;
 		this.y = y;
@@ -10,10 +21,14 @@ window.onload = function(){
 		this.collision = function(){
 			if(this.x > 290){
 				this.xVel *= -1;
+				p1Score++;
+				restart();
 			}
 
 			else if(this.x < 0){
 				this.xVel *= -1;
+				p2Score++;
+				restart();
 			}
 
 			else if(this.y < 0){
@@ -53,6 +68,29 @@ window.onload = function(){
 	var p2Up = false;
 	var p2Down = false;
 
+	var p1Score = 0;
+	var p2Score = 0;
+
+	var text;
+
+	function checkScore(){
+		if(p1Score == 10 || p2Score == 10){
+			ball.xVel = 0;
+			ball.yVel = 0;
+
+			if(p1Score == 10){
+				text = "Player 1 Wins!";
+			}
+
+			else if(p2Score == 10){
+				text = "Player 2 Wins!";
+			}
+
+			game = false;
+		}
+	}
+	
+
 	function actionPerformed(){
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
@@ -69,10 +107,22 @@ window.onload = function(){
 
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 
-		ctx.fillStyle = "white";
+		checkScore();
 
-		// the ball
-		ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
+		if(!game){
+			ctx.fillStyle = "pink";
+			ctx.fillText(text.toString(),60,50);
+		}
+
+		ctx.fillStyle = "white";
+		ctx.font = "23px Consolas";
+		ctx.fillText(p1Score.toString(),100,20);
+		ctx.fillText(p2Score.toString(),200,20);
+
+		if(game){
+			// the ball
+			ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
+		}
 
 		// paddle 1
 		ctx.fillStyle = "red";
@@ -82,30 +132,31 @@ window.onload = function(){
 		ctx.fillStyle = "blue";
 		ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
 
-		// dashed middle line
-		ctx.fillStyle = "white";
-		ctx.fillRect(150,0,5,5);
-		ctx.fillRect(150,10,5,5);
-		ctx.fillRect(150,20,5,5);
-		ctx.fillRect(150,30,5,5);
-		ctx.fillRect(150,40,5,5);
-		ctx.fillRect(150,50,5,5);
-		ctx.fillRect(150,60,5,5);
-		ctx.fillRect(150,70,5,5);
-		ctx.fillRect(150,80,5,5);
-		ctx.fillRect(150,90,5,5);
-		ctx.fillRect(150,100,5,5);
-		ctx.fillRect(150,110,5,5);
-		ctx.fillRect(150,120,5,5);
-		ctx.fillRect(150,130,5,5);
-		ctx.fillRect(150,140,5,5);
-		ctx.fillRect(150,149,5,5);
-
+		if(game){
+			ctx.fillStyle = "white";
+			ctx.fillRect(150,0,5,5);
+			ctx.fillRect(150,10,5,5);
+			ctx.fillRect(150,20,5,5);
+			ctx.fillRect(150,30,5,5);
+			ctx.fillRect(150,40,5,5);
+			ctx.fillRect(150,50,5,5);
+			ctx.fillRect(150,60,5,5);
+			ctx.fillRect(150,70,5,5);
+			ctx.fillRect(150,80,5,5);
+			ctx.fillRect(150,90,5,5);
+			ctx.fillRect(150,100,5,5);
+			ctx.fillRect(150,110,5,5);
+			ctx.fillRect(150,120,5,5);
+			ctx.fillRect(150,130,5,5);
+			ctx.fillRect(150,140,5,5);
+			ctx.fillRect(150,149,5,5);
+		}
 		
 		setTimeout(actionPerformed,10);
 	}
 
 	setTimeout(actionPerformed,10);
+	
 
 	function p1Collsion(){
 		if(ball.x < p1.x){
