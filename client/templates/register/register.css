@@ -1,5 +1,5 @@
 .registration-form{
-	width:400px;
+	width:500px;
 	border: 2px solid black;
 	border-radius: 15px;
 	padding: 10px;
@@ -7,4 +7,8 @@
 	margin-top: 50px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#register-here{
+	text-align: center;
 }

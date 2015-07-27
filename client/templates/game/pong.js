@@ -1,4 +1,4 @@
-window.onload = function(){
+Template.game.rendered = function(){
 
 	var game = true;
 
@@ -74,8 +74,6 @@ window.onload = function(){
 			this.y+=this.yVel;
 		}
 	}
-
-
 
 	function checkScore(){
 		if(p1Score == 10 || p2Score == 10){

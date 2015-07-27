@@ -10,3 +10,8 @@ insecure
 iron:router
 mrt:jquery-ui
 jquery
+bootstrap
+mrt:bootstrap-3
+accounts-ui
+accounts-password
+email
