@@ -2,7 +2,12 @@
 	<head></head>
 	<body>
 		<div class="navbar navbar-fixed top">
-			<h3>UNI-PONG</h3>
+			<div class="navbar-header"><h3>UNI-PONG</h3></div>
+			{{#if currentUser}}
+			<div class="navbar-right">
+				<button id="logout-button" class="btn btn-default form-control">Logout</button>
+			</div>
+			{{/if}}
 		</div>
 	</body>
 </template>
