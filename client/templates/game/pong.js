@@ -1,5 +1,9 @@
 Template.game.rendered = function(){
 
+	if(!Meteor.userId()){
+		window.location.href = "../"
+	}
+
 	var game = true;
 
 	var ball = new Ball(120,50,10,5,3,1);
@@ -152,8 +156,9 @@ Template.game.rendered = function(){
 			ctx.fillRect(150,130,5,5);
 			ctx.fillRect(150,140,5,5);
 			ctx.fillRect(150,149,5,5);
+
 		}
-		
+
 		setTimeout(actionPerformed,10);
 	}
 	
