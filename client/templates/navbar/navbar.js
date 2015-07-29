@@ -4,3 +4,7 @@ Template.navbar.events({
 		window.location.href='../'
 	}
 });
+
+Template.navbar.rendered = function(){
+ 
+}

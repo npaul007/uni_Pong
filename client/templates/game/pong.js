@@ -98,8 +98,20 @@ Template.game.rendered = function(){
 	
 
 	function actionPerformed(){
+		if(Game.find().count() === 0){
+			Game.insert({
+				ball:{
+					x:ball.x,
+					y:ball.y,
+					xVel:ball.xVel,
+					yVel:ball.yVel
+				}
+			});
+		}
+
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
+		var id = Game.findOne()._id;
 
 		ball.animate();
 
@@ -159,7 +171,10 @@ Template.game.rendered = function(){
 
 		}
 
+		Game.update({_id:id},{$set:{ball:{x:ball.x,y:ball.y,xVel:ball.xVel,yVel:ball.yVel}}});
+
 		setTimeout(actionPerformed,10);
+
 	}
 	
 	function p1Collsion(){
