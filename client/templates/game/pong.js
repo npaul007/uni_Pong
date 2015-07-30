@@ -104,14 +104,11 @@ Template.game.rendered = function(){
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
 
-		if(Game.find().count() === 0){
+		if(Game.find().count() <= 0){
 			Game.insert({
-				paddleOne:{
-					y:p1.y
-				},
-				paddleTwo:{
-					y:p2.y
-				}
+				p1:p1,
+				p2:p2,
+				ball:ball
 			});
 		}
 
@@ -146,11 +143,11 @@ Template.game.rendered = function(){
 
 		// paddle 1
 		ctx.fillStyle = "red";
-		ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
+		ctx.fillRect(Game.findOne().p1.x,Game.findOne().p1.y,Game.findOne().p1.width,Game.findOne().p1.height);
 
 		// paddle 2
 		ctx.fillStyle = "blue";
-		ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
+		ctx.fillRect(Game.findOne().p2.x,Game.findOne().p2.y,Game.findOne().p2.width,Game.findOne().p2.height);
 
 		if(game){
 			ctx.fillStyle = "white";
@@ -173,11 +170,12 @@ Template.game.rendered = function(){
 
 		}
 
-			Game.update({_id:"SjDr2BECgcBybp4QE"},{$set:{"paddleOne.y": p1.y}});
-		Game.update({_id:"SjDr2BECgcBybp4QE"},{$set:{"paddleTwo.y": p2.y}});
+		var v1 = Game.findOne().p1.x += p1.xVel;
+		var v2 =Game.findOne().p1.y += p1.yVel;
 
-		//console.log(p1.y);
-		//p1.y = newy;
+		//Game.update({_id:"SjDr2BECgcBybp4QE"},{$set:{"paddleOne.y": p1.y}});
+		Game.update({_id:"mC2JJW5Z4ToP8GYMJ"},{$set:{"p1.x": v1}});
+		Game.update({_id:"mC2JJW5Z4ToP8GYMJ"},{$set:{"p1.y": v2}});
 
 		setTimeout(actionPerformed,10);
 
