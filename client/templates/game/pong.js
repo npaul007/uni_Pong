@@ -112,12 +112,12 @@ Template.game.rendered = function(){
 			});
 		}
 
-		//ball.animate();
+		ball.animate();
 
 		p1.animate();
 		p2.animate();
 
-		//ball.collision();
+		ball.collision();
 
 		p1Collsion();
 		p2Collsion();
@@ -138,7 +138,7 @@ Template.game.rendered = function(){
 
 		if(game){
 			// the ball
-			//ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
+			ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 		}
 
 		// paddle 1
