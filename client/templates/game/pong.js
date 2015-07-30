@@ -104,20 +104,20 @@ Template.game.rendered = function(){
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
 
-		if(Game.find().count() <= 0){
+		/* if(Game.find().count() <= 0){
 			Game.insert({
 				p1:p1,
 				p2:p2,
 				ball:ball
 			});
-		}
+		 } */
 
-		ball.animate();
+		//ball.animate();
 
 		p1.animate();
 		p2.animate();
 
-		ball.collision();
+		//ball.collision();
 
 		p1Collsion();
 		p2Collsion();
@@ -138,16 +138,18 @@ Template.game.rendered = function(){
 
 		if(game){
 			// the ball
-			ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
+			//ctx.fillRect(Game.findOne().ball.x,Game.findOne().ball.y,Game.findOne().ball.width,Game.findOne().ball.height);
 		}
+
+		var id = Game.findOne();
 
 		// paddle 1
 		ctx.fillStyle = "red";
-		ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
+		ctx.fillRect(Game.findOne(id).p1.x,Game.findOne(id).p1.y,Game.findOne(id).p1.width,Game.findOne(id).p1.height);
 
 		// paddle 2
 		ctx.fillStyle = "blue";
-		ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
+		ctx.fillRect(Game.findOne(id).p2.x,Game.findOne(id).p2.y,Game.findOne(id).p2.width,Game.findOne(id).p2.height);
 
 		if(game){
 			ctx.fillStyle = "white";
@@ -167,13 +169,17 @@ Template.game.rendered = function(){
 			ctx.fillRect(150,130,5,5);
 			ctx.fillRect(150,140,5,5);
 			ctx.fillRect(150,149,5,5);
-
 		}
 
-		var v1 = Game.findOne().p1.x += p1.xVel;
-		var v2 =Game.findOne().p1.y += p1.yVel;
+		var p1v1y = Game.findOne(id).p1.x += p1.yVel;
+		var p2v1y =Game.findOne(id).p2.y += p2.yVel;
+		var ballv1x = Game.findOne(id).ball.x += ball.xVel;
+		var ballv1y = Game.findOne(id).ball.y += ball.yVel;
 
-		//Game.update({_id:"SjDr2BECgcBybp4QE"},{$set:{"paddleOne.y": p1.y}});
+		Game.update({_id:"goZ8wX8r5PRmCp5TN"},{$set:{"p1.y": p1v1y}});
+		Game.update({_id:"goZ8wX8r5PRmCp5TN"},{$set:{"p2.y": p2v1y}});
+		Game.update({_id:"goZ8wX8r5PRmCp5TN"},{$set:{"ball.y": ballv1y}});
+		Game.update({_id:"goZ8wX8r5PRmCp5TN"},{$set:{"ball.x": ballv1x}});
 		//Game.update({_id:"mC2JJW5Z4ToP8GYMJ"},{$set:{"p1.x": v1}});
 		//Game.update({_id:"mC2JJW5Z4ToP8GYMJ"},{$set:{"p1.y": v2}});
 
@@ -264,5 +270,7 @@ Template.game.rendered = function(){
 			break;
 		}
 	}
+
 }
+
 
