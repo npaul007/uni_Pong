@@ -21,6 +21,8 @@ Template.game.rendered = function(){
 
 	var text;
 
+	var countDown = 30;
+
 	setTimeout(actionPerformed,10);
 
 	function restart(){
@@ -98,27 +100,27 @@ Template.game.rendered = function(){
 	
 
 	function actionPerformed(){
+
+		var canvas = document.getElementById('myCanvas');
+		var ctx = canvas.getContext('2d');
+
 		if(Game.find().count() === 0){
 			Game.insert({
-				ball:{
-					x:ball.x,
-					y:ball.y,
-					xVel:ball.xVel,
-					yVel:ball.yVel
+				paddleOne:{
+					y:p1.y
+				},
+				paddleTwo:{
+					y:p2.y
 				}
 			});
 		}
 
-		var canvas = document.getElementById('myCanvas');
-		var ctx = canvas.getContext('2d');
-		var id = Game.findOne()._id;
-
-		ball.animate();
+		//ball.animate();
 
 		p1.animate();
 		p2.animate();
 
-		ball.collision();
+		//ball.collision();
 
 		p1Collsion();
 		p2Collsion();
@@ -139,7 +141,7 @@ Template.game.rendered = function(){
 
 		if(game){
 			// the ball
-			ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
+			//ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 		}
 
 		// paddle 1
@@ -171,12 +173,16 @@ Template.game.rendered = function(){
 
 		}
 
-		Game.update({_id:id},{$set:{ball:{x:ball.x,y:ball.y,xVel:ball.xVel,yVel:ball.yVel}}});
+			Game.update({_id:"SjDr2BECgcBybp4QE"},{$set:{"paddleOne.y": p1.y}});
+		Game.update({_id:"SjDr2BECgcBybp4QE"},{$set:{"paddleTwo.y": p2.y}});
+
+		//console.log(p1.y);
+		//p1.y = newy;
 
 		setTimeout(actionPerformed,10);
 
 	}
-	
+
 	function p1Collsion(){
 		if(ball.x < p1.x){
 			if(ball.y >= p1.y && ball.y <= p1.height+p1.y){
