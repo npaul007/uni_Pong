@@ -141,13 +141,14 @@ Template.game.rendered = function(){
 			ctx.fillRect(Game.findOne().ball.x,Game.findOne().ball.y,Game.findOne().ball.width,Game.findOne().ball.height);
 		}
 
+		var id = Game.findOne()._id;
 		// paddle 1
 		ctx.fillStyle = "red";
-		ctx.fillRect(Game.findOne().p1.x,Game.findOne().p1.y,Game.findOne().p1.width,Game.findOne().p1.height);
+		ctx.fillRect(Game.findOne({_id:id}).p1.x,Game.findOne({_id:id}).p1.y,Game.findOne({_id:id}).p1.width,Game.findOne({_id:id}).p1.height);
 
 		// paddle 2
 		ctx.fillStyle = "blue";
-		ctx.fillRect(Game.findOne().p2.x,Game.findOne().p2.y,Game.findOne().p2.width,Game.findOne().p2.height);
+		ctx.fillRect(Game.findOne({_id:id}).p2.x,Game.findOne({_id:id}).p2.y,Game.findOne({_id:id}).p2.width,Game.findOne({_id:id}).p2.height);
 
 		if(game){
 			ctx.fillStyle = "white";
