@@ -141,15 +141,13 @@ Template.game.rendered = function(){
 			//ctx.fillRect(Game.findOne().ball.x,Game.findOne().ball.y,Game.findOne().ball.width,Game.findOne().ball.height);
 		}
 
-		var id = Game.findOne();
-
 		// paddle 1
 		ctx.fillStyle = "red";
-		ctx.fillRect(Game.findOne(id).p1.x,Game.findOne(id).p1.y,Game.findOne(id).p1.width,Game.findOne(id).p1.height);
+		ctx.fillRect(Game.findOne({_id:"goZ8wX8r5PRmCp5TN"}).p1.x,Game.findOne({_id:"goZ8wX8r5PRmCp5TN"}).p1.y,Game.findOne({_id:"goZ8wX8r5PRmCp5TN"}).p1.width,Game.findOne({_id:"goZ8wX8r5PRmCp5TN"}).p1.height);
 
 		// paddle 2
 		ctx.fillStyle = "blue";
-		ctx.fillRect(Game.findOne(id).p2.x,Game.findOne(id).p2.y,Game.findOne(id).p2.width,Game.findOne(id).p2.height);
+		ctx.fillRect(Game.findOne({_id:"goZ8wX8r5PRmCp5TN"}).p2.x,Game.findOne({_id:"goZ8wX8r5PRmCp5TN"}).p2.y,Game.findOne({_id:"goZ8wX8r5PRmCp5TN"}).p2.width,Game.findOne({_id:"goZ8wX8r5PRmCp5TN"}).p2.height);
 
 		if(game){
 			ctx.fillStyle = "white";
@@ -171,10 +169,10 @@ Template.game.rendered = function(){
 			ctx.fillRect(150,149,5,5);
 		}
 
-		var p1v1y = Game.findOne(id).p1.x += p1.yVel;
-		var p2v1y =Game.findOne(id).p2.y += p2.yVel;
-		var ballv1x = Game.findOne(id).ball.x += ball.xVel;
-		var ballv1y = Game.findOne(id).ball.y += ball.yVel;
+		var p1v1y = Game.findOne().p1.x += p1.yVel;
+		var p2v1y =Game.findOne().p2.y += p2.yVel;
+		var ballv1x = Game.findOne().ball.x += ball.xVel;
+		var ballv1y = Game.findOne().ball.y += ball.yVel;
 
 		Game.update({_id:"goZ8wX8r5PRmCp5TN"},{$set:{"p1.y": p1v1y}});
 		Game.update({_id:"goZ8wX8r5PRmCp5TN"},{$set:{"p2.y": p2v1y}});
