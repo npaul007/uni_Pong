@@ -175,10 +175,10 @@ Template.game.rendered = function(){
 		var ballv1x = Game.findOne().ball.x += ball.xVel;
 		var ballv1y = Game.findOne().ball.y += ball.yVel;
 
-		Game.update({_id:"goZ8wX8r5PRmCp5TN"},{$set:{"p1.y": p1v1y}});
-		Game.update({_id:"goZ8wX8r5PRmCp5TN"},{$set:{"p2.y": p2v1y}});
-		Game.update({_id:"goZ8wX8r5PRmCp5TN"},{$set:{"ball.y": ballv1y}});
-		Game.update({_id:"goZ8wX8r5PRmCp5TN"},{$set:{"ball.x": ballv1x}});
+		Game.update({_id:id},{$set:{"p1.y": p1v1y}});
+		Game.update({_id:id},{$set:{"p2.y": p2v1y}});
+		Game.update({_id:id},{$set:{"ball.y": ballv1y}});
+		Game.update({_id:id},{$set:{"ball.x": ballv1x}});
 		//Game.update({_id:"mC2JJW5Z4ToP8GYMJ"},{$set:{"p1.x": v1}});
 		//Game.update({_id:"mC2JJW5Z4ToP8GYMJ"},{$set:{"p1.y": v2}});
 
