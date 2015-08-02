@@ -6,33 +6,14 @@ Template.game.rendered = function(){
 
 	var game = true;
 
-	var ball = new Ball(120,50,10,5,3,1);
-	var p1 = new Paddle(10,60,0,0);
-	var p2 = new Paddle(280,60,0,0);
-
 	var p1Up = false;
 	var p1Down = false;
-
 	var p2Up = false;
 	var p2Down = false;
-
 	var p1Score = 0;
 	var p2Score = 0;
 
-	var text;
-
-	var countDown = 30;
-
 	setTimeout(actionPerformed,10);
-
-	function restart(){
-		p1.y = 60;
-		p1.y = 60;
-		p2.y = 60;
-		p2.y = 60;
-		ball.x = 120;
-		ball.y = 50;
-	}
 
 	function Ball(x,y,width,height,xVel,yVel){
 		this.x = x;
@@ -81,50 +62,24 @@ Template.game.rendered = function(){
 		}
 	}
 
-	function checkScore(){
-		if(p1Score == 10 || p2Score == 10){
-			ball.xVel = 0;
-			ball.yVel = 0;
-
-			if(p1Score == 10){
-				text = "Player 1 Wins!";
-			}
-
-			else if(p2Score == 10){
-				text = "Player 2 Wins!";
-			}
-
-			game = false;
-		}
-	}
+	var ball = new Ball(120,50,10,5,3,1);
+	var p1 = new Paddle(10,60,0,0);
+	var p2 = new Paddle(280,60,0,0);
 	
-
 	function actionPerformed(){
 
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
 
-		/* if(Game.find().count() <= 0){
-			Game.insert({
-				p1:p1,
-				p2:p2,
-				ball:ball
-			});
-		 } */
-
 		//ball.animate();
-
 		p1.animate();
 		p2.animate();
 
-		//ball.collision();
-
+		ball.collision();
 		p1Collsion();
 		p2Collsion();
 
 		ctx.clearRect(0,0,canvas.width,canvas.height);
-
-		checkScore();
 
 		if(!game){
 			ctx.fillStyle = "pink";
@@ -138,17 +93,16 @@ Template.game.rendered = function(){
 
 		if(game){
 			// the ball
-			ctx.fillRect(Game.findOne().ball.x,Game.findOne().ball.y,Game.findOne().ball.width,Game.findOne().ball.height);
+			//ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 		}
 
-		var id = Game.findOne()._id;
 		// paddle 1
 		ctx.fillStyle = "red";
-		ctx.fillRect(Game.findOne({_id:id}).p1.x,Game.findOne({_id:id}).p1.y,Game.findOne({_id:id}).p1.width,Game.findOne({_id:id}).p1.height);
+		ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
 
 		// paddle 2
 		ctx.fillStyle = "blue";
-		ctx.fillRect(Game.findOne({_id:id}).p2.x,Game.findOne({_id:id}).p2.y,Game.findOne({_id:id}).p2.width,Game.findOne({_id:id}).p2.height);
+		ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
 
 		if(game){
 			ctx.fillStyle = "white";
@@ -169,18 +123,6 @@ Template.game.rendered = function(){
 			ctx.fillRect(150,140,5,5);
 			ctx.fillRect(150,149,5,5);
 		}
-
-		var p1v1y = Game.findOne().p1.y += p1.yVel;
-		var p2v1y =Game.findOne().p2.y += p2.yVel;
-		var ballv1x = Game.findOne().ball.x += ball.xVel;
-		var ballv1y = Game.findOne().ball.y += ball.yVel;
-
-		Game.update({_id:id},{$set:{"p1.y": p1v1y}});
-		Game.update({_id:id},{$set:{"p2.y": p2v1y}});
-		Game.update({_id:id},{$set:{"ball.y": ballv1y}});
-		Game.update({_id:id},{$set:{"ball.x": ballv1x}});
-		//Game.update({_id:"mC2JJW5Z4ToP8GYMJ"},{$set:{"p1.x": v1}});
-		//Game.update({_id:"mC2JJW5Z4ToP8GYMJ"},{$set:{"p1.y": v2}});
 
 		setTimeout(actionPerformed,10);
 
@@ -270,6 +212,17 @@ Template.game.rendered = function(){
 		}
 	}
 
+	  Accounts.onLogin(function(options) {
+	   if(Game.findOne({id : Meteor.userId()}) === undefined) {
+	    // Add a new player for the new user.
+	    Game.insert({
+	      id: Meteor.userId(),
+	      p1:p1
+	    });
+	   }
+	  });
+
 }
+
 
 
