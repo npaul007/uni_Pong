@@ -96,13 +96,25 @@ Template.game.rendered = function(){
 			//ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 		}
 
+		var id = Meteor.userId();
+
+		var p1x = Game.findOne().p1.x;
+		var p1y = Game.findOne().p1.y;
+		var p1width = Game.findOne().p1.width;
+		var p1height = Game.findOne().p1.height;
+
 		// paddle 1
 		ctx.fillStyle = "red";
-		ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
+		ctx.fillRect(p1x ,p1y ,p1width ,p1height );
 
 		// paddle 2
 		ctx.fillStyle = "blue";
 		ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
+
+		var p1newY = Game.findOne({id : Meteor.userId()}).p1.y;
+		p1newY += p1.yVel;
+
+		Game.update({_id:Game.findOne()._id}, {$set:{"p1.y":p1newY}});
 
 		if(game){
 			ctx.fillStyle = "white";
