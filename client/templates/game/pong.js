@@ -49,6 +49,14 @@ Template.game.rendered = function(){
 		}
 	}
 
+	function restart(){
+		ball.x = 120;
+		ball.y =  50;
+		p1.y = 60;
+		p2.y = p1.y;
+	}
+
+
 	function Paddle(x,y,xVel,yVel){
 		this.x = x;
 		this.y = y;
@@ -70,7 +78,7 @@ Template.game.rendered = function(){
 
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
-		
+
 		ball.animate();
 		p1.animate();
 		p2.animate();
