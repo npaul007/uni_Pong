@@ -118,18 +118,26 @@ Template.dashboard.rendered = function(){
 
 		if(p2Score === winningScore){
 			game = false;
+
 			win = "You Lose!";
 			play=" ";
+
 			ctx.font = "23px Consolas";
 			ctx.fillText(win,45,100);
+
+			Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.losses":1}});
 		}
 
 		if(p1Score === winningScore){
 			game = false;
+
 			play=" ";
 			win = "You Win!";
+
 			ctx.font = "23px Consolas";
 			ctx.fillText(win,45,100);
+
+			Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.wins":1}});
 		}
 
 		// paddle 1
@@ -159,10 +167,11 @@ Template.dashboard.rendered = function(){
 			ctx.fillRect(150,130,5,5);
 			ctx.fillRect(150,140,5,5);
 			ctx.fillRect(150,149,5,5);
-	}
+		}
 
-
-		setTimeout(actionPerformed,10);
+		if(game){
+			setTimeout(actionPerformed,10);
+		}
 
 	}
 

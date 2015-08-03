@@ -12,7 +12,9 @@ Template.register.events({
 			email:email,
 			password:password,
 			profile:{
-				nickname:nickname
+				nickname:nickname,
+				wins:0,
+				losses:0
 			}
 		});
 
