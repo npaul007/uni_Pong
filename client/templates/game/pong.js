@@ -71,7 +71,15 @@ Template.game.rendered = function(){
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
 
-		//ball.animate();
+	    if(Game.find().fetch().length === 0){
+	      Game.insert({
+	        ball:ball,
+	        p1:p1,
+	        p2:p2
+	      });
+	    }
+
+		ball.animate();
 		p1.animate();
 		p2.animate();
 
@@ -93,28 +101,16 @@ Template.game.rendered = function(){
 
 		if(game){
 			// the ball
-			//ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
+			ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 		}
-
-		var id = Meteor.userId();
-
-		var p1x = Game.findOne().p1.x;
-		var p1y = Game.findOne().p1.y;
-		var p1width = Game.findOne().p1.width;
-		var p1height = Game.findOne().p1.height;
 
 		// paddle 1
 		ctx.fillStyle = "red";
-		ctx.fillRect(p1x ,p1y ,p1width ,p1height );
+		ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
 
 		// paddle 2
 		ctx.fillStyle = "blue";
 		ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
-
-		var p1newY = Game.findOne({id : Meteor.userId()}).p1.y;
-		p1newY += p1.yVel;
-
-		Game.update({_id:Game.findOne()._id}, {$set:{"p1.y":p1newY}});
 
 		if(game){
 			ctx.fillStyle = "white";
@@ -224,15 +220,6 @@ Template.game.rendered = function(){
 		}
 	}
 
-	  Accounts.onLogin(function(options) {
-	   if(Game.findOne({id : Meteor.userId()}) === undefined) {
-	    // Add a new player for the new user.
-	    Game.insert({
-	      id: Meteor.userId(),
-	      p1:p1
-	    });
-	   }
-	  });
 
 }
 
