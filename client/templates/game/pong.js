@@ -20,6 +20,8 @@ Template.dashboard.rendered = function(){
 
 	var winningScore = 5;
 
+	on=true;
+
 	setTimeout(actionPerformed,10);
 
 	function Ball(x,y,width,height,xVel,yVel){
@@ -81,8 +83,8 @@ Template.dashboard.rendered = function(){
 	var p2 = new Paddle(295,60,0,0);
 
 	function actionPerformed(){
-
-		var canvas = document.getElementById('myCanvas');
+		if(on){
+			var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
 		
 		p1.animate();
@@ -126,6 +128,7 @@ Template.dashboard.rendered = function(){
 			ctx.fillText(win,45,100);
 
 			Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.losses":1}});
+			on = false;
 		}
 
 		if(p1Score === winningScore){
@@ -138,6 +141,7 @@ Template.dashboard.rendered = function(){
 			ctx.fillText(win,45,100);
 
 			Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.wins":1}});
+			on = false;
 		}
 
 		// paddle 1
@@ -168,10 +172,11 @@ Template.dashboard.rendered = function(){
 			ctx.fillRect(150,140,5,5);
 			ctx.fillRect(150,149,5,5);
 		}
+		
+	}
 
-		if(game){
-			setTimeout(actionPerformed,10);
-		}
+		setTimeout(actionPerformed,10);
+		
 
 	}
 
