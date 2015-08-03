@@ -60,8 +60,8 @@ Template.game.rendered = function(){
 	function Paddle(x,y,xVel,yVel){
 		this.x = x;
 		this.y = y;
-		this.width = 10;
-		this.height = 30;
+		this.width = 4;
+		this.height = 15;
 		this.xVel = xVel;
 		this.yVel = yVel;
 		this.animate = function(){
@@ -70,7 +70,7 @@ Template.game.rendered = function(){
 		}
 	}
 
-	var ball = new Ball(120,50,10,5,3,1);
+	var ball = new Ball(120,50,10,2,2,1);
 	var p1 = new Paddle(10,60,0,0);
 	var p2 = new Paddle(280,60,0,0);
 	
