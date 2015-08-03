@@ -16,6 +16,9 @@ Template.dashboard.rendered = function(){
 	var p2Score = 0;
 
 	var play = "Press 'P' to Play!";
+	var win;
+
+	var winningScore = 5;
 
 	setTimeout(actionPerformed,10);
 
@@ -76,17 +79,15 @@ Template.dashboard.rendered = function(){
 	var ball = new Ball(120,50,3,3,2,1);
 	var p1 = new Paddle(5,60,0,0);
 	var p2 = new Paddle(295,60,0,0);
-	
+
 	function actionPerformed(){
 
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
-
 		
 		p1.animate();
 		p2.animate();
 
-		
 		p1Collsion();
 		p2Collsion();
 
@@ -97,6 +98,11 @@ Template.dashboard.rendered = function(){
 		ctx.fillText(p1Score.toString(),100,20);
 		ctx.fillText(p2Score.toString(),200,20);
 
+		ctx.font = "10px Consolas";
+	
+		ctx.fillText("You",20,20);
+		ctx.fillText("CPU",280,20);
+
 		if(game){
 			// the ball
 			ball.animate();
@@ -106,7 +112,24 @@ Template.dashboard.rendered = function(){
 
 		if(!game){
 			ctx.fillStyle = "white";
-			ctx.fillText(play,50,100);
+			ctx.font = "23px Consolas";
+			ctx.fillText(play,45,100);
+		}
+
+		if(p2Score === winningScore){
+			game = false;
+			win = "You Lose!";
+			play=" ";
+			ctx.font = "23px Consolas";
+			ctx.fillText(win,45,100);
+		}
+
+		if(p1Score === winningScore){
+			game = false;
+			play=" ";
+			win = "You Win!";
+			ctx.font = "23px Consolas";
+			ctx.fillText(win,45,100);
 		}
 
 		// paddle 1
@@ -136,7 +159,7 @@ Template.dashboard.rendered = function(){
 			ctx.fillRect(150,130,5,5);
 			ctx.fillRect(150,140,5,5);
 			ctx.fillRect(150,149,5,5);
-		}
+	}
 
 
 		setTimeout(actionPerformed,10);
