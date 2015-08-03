@@ -13,7 +13,7 @@ Template.login.events({
 			if(error){
 				showInvalid();
 			}else{
-				window.location.href= "../pong"
+				window.location.href= "../dash"
 			}
 		});
 	}

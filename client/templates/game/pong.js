@@ -1,17 +1,21 @@
-Template.game.rendered = function(){
+Template.dashboard.rendered = function(){
 
 	if(!Meteor.userId()){
 		window.location.href = "../"
 	}
 
-	var game = true;
+	var game = false;
 
 	var p1Up = false;
 	var p1Down = false;
+
 	var p2Up = false;
 	var p2Down = false;
+
 	var p1Score = 0;
 	var p2Score = 0;
+
+	var play = "Press 'P' to Play!";
 
 	setTimeout(actionPerformed,10);
 
@@ -23,7 +27,7 @@ Template.game.rendered = function(){
 		this.xVel = xVel;
 		this.yVel = yVel;
 		this.collision = function(){
-			if(this.x > 290){
+			if(this.x > 330){
 				this.xVel *= -1;
 				p1Score++;
 				restart();
@@ -49,19 +53,11 @@ Template.game.rendered = function(){
 		}
 	}
 
-	function restart(){
-		ball.x = 120;
-		ball.y =  50;
-		p1.y = 60;
-		p2.y = p1.y;
-	}
-
-
 	function Paddle(x,y,xVel,yVel){
 		this.x = x;
 		this.y = y;
-		this.width = 4;
-		this.height = 15;
+		this.width = 6;
+		this.height = 20;
 		this.xVel = xVel;
 		this.yVel = yVel;
 		this.animate = function(){
@@ -70,29 +66,31 @@ Template.game.rendered = function(){
 		}
 	}
 
-	var ball = new Ball(120,50,10,2,2,1);
-	var p1 = new Paddle(10,60,0,0);
-	var p2 = new Paddle(280,60,0,0);
+	function restart(){
+		ball.x = 120;
+		ball.y =  50;
+		p1.y = 60;
+		p2.y = p1.y;
+	}
+
+	var ball = new Ball(120,50,3,3,2,1);
+	var p1 = new Paddle(5,60,0,0);
+	var p2 = new Paddle(295,60,0,0);
 	
 	function actionPerformed(){
 
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
 
-		ball.animate();
+		
 		p1.animate();
 		p2.animate();
 
-		ball.collision();
+		
 		p1Collsion();
 		p2Collsion();
 
 		ctx.clearRect(0,0,canvas.width,canvas.height);
-
-		if(!game){
-			ctx.fillStyle = "pink";
-			ctx.fillText(text.toString(),60,50);
-		}
 
 		ctx.fillStyle = "white";
 		ctx.font = "23px Consolas";
@@ -101,7 +99,14 @@ Template.game.rendered = function(){
 
 		if(game){
 			// the ball
+			ball.animate();
+			ball.collision();
 			ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
+		}
+
+		if(!game){
+			ctx.fillStyle = "white";
+			ctx.fillText(play,50,100);
 		}
 
 		// paddle 1
@@ -112,6 +117,7 @@ Template.game.rendered = function(){
 		ctx.fillStyle = "blue";
 		ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
 
+		// dashed line down center
 		if(game){
 			ctx.fillStyle = "white";
 			ctx.fillRect(150,0,5,5);
@@ -131,6 +137,7 @@ Template.game.rendered = function(){
 			ctx.fillRect(150,140,5,5);
 			ctx.fillRect(150,149,5,5);
 		}
+
 
 		setTimeout(actionPerformed,10);
 
@@ -164,6 +171,13 @@ Template.game.rendered = function(){
 
 	document.onkeydown = function(event){
 		switch(event.keyCode){
+			case 80:
+			if(game){
+				game = false;
+			}else{
+				game = true;
+			}
+			break;
 			// w key
 			case 87:
 				p1Up = true;
