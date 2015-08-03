@@ -70,15 +70,7 @@ Template.game.rendered = function(){
 
 		var canvas = document.getElementById('myCanvas');
 		var ctx = canvas.getContext('2d');
-
-	    if(Game.find().fetch().length === 0){
-	      Game.insert({
-	        ball:ball,
-	        p1:p1,
-	        p2:p2
-	      });
-	    }
-
+		
 		ball.animate();
 		p1.animate();
 		p2.animate();
