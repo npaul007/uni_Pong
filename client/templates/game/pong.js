@@ -144,6 +144,23 @@ Template.dashboard.rendered = function(){
 			on = false;
 		}
 
+		// moves cpu paddle up to catch ball
+		if(ball.y < p2.y && game){
+			if(ball.y >= p2.y && ball.y <= p2.height && ball.xVel > 0){
+				p2.yVel = 0;
+			}else{
+				p2.yVel = -1;
+			}
+		}
+
+		else if(ball.y > p2.y && game){
+			if(ball.y >= p2.y && ball.y <= p2.height && ball.xVel > 0){
+				p2.yVel = 0
+			}else{
+				p2.yVel = 1;
+			}
+		}
+
 		// paddle 1
 		ctx.fillStyle = "red";
 		ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
