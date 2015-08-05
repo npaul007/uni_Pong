@@ -18,7 +18,7 @@ Template.dashboard.rendered = function(){
 	var play = "Press 'P' to Play!";
 	var win;
 
-	var winningScore = 15;
+	var winningScore = 5;
 
 	on=true;
 
@@ -125,7 +125,16 @@ Template.dashboard.rendered = function(){
 				ctx.font = "23px Consolas";
 				ctx.fillText(win,45,100);
 
-				//Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.losses":1}});
+				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.losses":1}});
+
+				var wins = Meteor.users.findOne({_id:Meteor.userId()}).profile.wins;
+				var losses = Meteor.users.findOne({_id:Meteor.userId()}).profile.losses;
+
+				var games = wins + losses;
+				var pct = (wins/games);
+
+				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.pct":pct}});
+
 				on = false;
 				game = false;
 			}
@@ -137,7 +146,16 @@ Template.dashboard.rendered = function(){
 				ctx.font = "23px Consolas";
 				ctx.fillText(win,45,100);
 
-				//Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.wins":1}});
+				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.wins":1}});
+
+				var wins = Meteor.users.findOne({_id:Meteor.userId()}).profile.wins;
+				var losses = Meteor.users.findOne({_id:Meteor.userId()}).profile.losses;
+
+				var games = wins + losses;
+				var pct = (wins/games);
+
+				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.pct":pct}});
+
 				on = false;
 				game = false;
 			}

@@ -83,8 +83,8 @@ Template.multiplayer.rendered = function(){
 	var p2 = new Paddle(285,60,0,0);
 
 	// live stream for multiplayer
-	pongStream = new Meteor.Stream('pong');
-
+	
+	/*
 	if (Meteor.isClient) {
 
 	  pongStream.on('displayp1XPosition', function(xPosition) {
@@ -104,19 +104,8 @@ Template.multiplayer.rendered = function(){
 
 	  });
 
-	  Template.multiplayer.helpers({
-
-	    'p1xPosition' : function() {
-	      return Session.get('p1x');
-	    },
-
-	    'p1yPosition' : function() {
-	      return Session.get('p1y');
-	    }
-
-	  });
-
-	}
+	}*/
+	pongStream = new Meteor.Stream('pong');
 
 	function actionPerformed(){
 		if(on){
@@ -180,27 +169,21 @@ Template.multiplayer.rendered = function(){
 				game = false;
 			}
 
-			/*
-			// moves cpu paddle up to catch ball
-			if(ball.y < p2.y && game){
-				if(ball.y >= p2.y && ball.y <= p2.height && ball.xVel > 0){
-					p2.yVel = 0;
-				}else{
-					p2.yVel = -1;
-				}
-			}
-
-			else if(ball.y > p2.y && game){
-				if(ball.y >= p2.y && ball.y <= p2.height && ball.xVel > 0){
-					p2.yVel = 0
-				}else{
-					p2.yVel = 1;
-				}
-			}*/
-
 			// paddle 1
 			ctx.fillStyle = "red";
-			ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
+
+			pongStream.emit('displayp1XPosition', p1.x)
+			pongStream.emit('displayp1YPosition', p1.y)
+
+			pongStream.on('displayp1XPosition', function(xPosition) {
+				Session.set('p1x', p1xPosition);
+			});
+
+			pongStream.on('displayp1YPosition', function(yPosition) {
+				Session.set('p1y', p1yPosition);
+			});
+
+			ctx.fillRect(Session.get('p1x'), Session.get('p1y'), p1.width,p1.height);
 
 			// paddle 2
 			ctx.fillStyle = "blue";
