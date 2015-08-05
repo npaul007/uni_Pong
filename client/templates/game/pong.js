@@ -18,7 +18,7 @@ Template.dashboard.rendered = function(){
 	var play = "Press 'P' to Play!";
 	var win;
 
-	var winningScore = 5;
+	var winningScore = 10;
 
 	on=true;
 
