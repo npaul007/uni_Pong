@@ -200,7 +200,7 @@ Template.multiplayer.rendered = function(){
 
 			// paddle 1
 			ctx.fillStyle = "red";
-			ctx.fillRect(Session.get('p1x'),Session.get('p1y'),p1.width,p1.height);
+			ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
 
 			// paddle 2
 			ctx.fillStyle = "blue";

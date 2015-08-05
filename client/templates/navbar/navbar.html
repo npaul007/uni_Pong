@@ -2,14 +2,11 @@
 	<head></head>
 	<body>
 		<div class="navbar navbar-fixed top">
-			<div class="navbar-header"><h3>UNI-PONG</h3></div>
+			<div class="navbar-header"><h2>UNI-PONG</h2></div>
 			{{#if currentUser}}
 			<div class="navbar-right">
-				{{#with nickname}}
-					{{#with profile}}
-						<h3> Hello {{nickname}}!</h3>
-					{{/with}}
-				{{/with}}
+				<button id="multiplayer-redirect" class="btn btn-default form-control">Multiplayer</button>
+				<button id="leaderboard-redirect" class="btn btn-default form-control">Leaderboard</button>
 				<button id="logout-button" class="btn btn-default form-control">Logout</button>
 			</div>
 			{{/if}}
