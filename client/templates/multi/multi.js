@@ -1,8 +1,5 @@
 Template.multiplayer.rendered = function(){
 
-	// live stream for multiplayer
-	pongStream = new Meteor.Stream('pong');
-
 	if(!Meteor.userId()){
 		window.location.href = "../"
 	}
@@ -84,6 +81,9 @@ Template.multiplayer.rendered = function(){
 	var ball = new Ball(120,50,3,3,2,1);
 	var p1 = new Paddle(5,60,0,0);
 	var p2 = new Paddle(285,60,0,0);
+
+	// live stream for multiplayer
+	pongStream = new Meteor.Stream('pong');
 
 	if (Meteor.isClient) {
 

@@ -14,7 +14,8 @@ Template.register.events({
 			profile:{
 				nickname:nickname,
 				wins:0,
-				losses:0
+				losses:0,
+				pct:wins/(wins+losses)
 			}
 		});
 
