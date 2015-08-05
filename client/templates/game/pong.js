@@ -127,8 +127,8 @@ Template.dashboard.rendered = function(){
 
 				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.losses":1}});
 
-				var wins = Meteor.users.findOne({_id:Meteor.userId()}).profile.wins;
-				var losses = Meteor.users.findOne({_id:Meteor.userId()}).profile.losses;
+				var wins = Meteor.user().profile.wins;
+				var losses = Meteor.user().profile.losses;
 
 				var games = wins + losses;
 				var pct = (wins/games);
@@ -148,8 +148,8 @@ Template.dashboard.rendered = function(){
 
 				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.wins":1}});
 
-				var wins = Meteor.users.findOne({_id:Meteor.userId()}).profile.wins;
-				var losses = Meteor.users.findOne({_id:Meteor.userId()}).profile.losses;
+				var wins = Meteor.user().profile.wins;
+				var losses = Meteor.user().profile.losses;
 
 				var games = wins + losses;
 				var pct = (wins/games);
