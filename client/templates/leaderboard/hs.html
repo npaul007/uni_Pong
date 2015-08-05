@@ -1,0 +1,16 @@
+<template name="leaderboard">
+	<body>
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<h1>Leaderboard</h1>
+			<ol>
+				{{#each users}}
+					{{#with profile}}
+						<li>{{nickname}} <strong>{{wins}}-{{losses}}</strong></li>
+					{{/with}}
+				{{/each}}
+			</ol>
+		</div>
+		<div class="col-md-4"></div>
+	</body>
+</template>

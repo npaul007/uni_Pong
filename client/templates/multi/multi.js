@@ -1,4 +1,7 @@
-Template.dashboard.rendered = function(){
+Template.multiplayer.rendered = function(){
+
+	// live stream for multiplayer
+	pongStream = new Meteor.Stream('pong');
 
 	if(!Meteor.userId()){
 		window.location.href = "../"
@@ -80,11 +83,44 @@ Template.dashboard.rendered = function(){
 
 	var ball = new Ball(120,50,3,3,2,1);
 	var p1 = new Paddle(5,60,0,0);
-	var p2 = new Paddle(295,60,0,0);
+	var p2 = new Paddle(285,60,0,0);
+
+	if (Meteor.isClient) {
+
+	  pongStream.on('displayp1XPosition', function(xPosition) {
+	    Session.set('p1x', p1xPosition);
+	  });
+
+	  pongStream.on('displayp1YPosition', function(yPosition) {
+	    Session.set('p1y', p1yPosition);
+	  });
+
+	  Template.multiplayer.events({
+	    
+	   updateCanvas: function(event) {
+	      pongStream.emit('displayp1XPosition', p1.x)
+	      pongStream.emit('displayp1YPosition', p1.y)
+	    }
+
+	  });
+
+	  Template.multiplayer.helpers({
+
+	    'p1xPosition' : function() {
+	      return Session.get('p1x');
+	    },
+
+	    'p1yPosition' : function() {
+	      return Session.get('p1y');
+	    }
+
+	  });
+
+	}
 
 	function actionPerformed(){
 		if(on){
-			var canvas = document.getElementById('myCanvas');
+			var canvas = document.getElementById('multiCanvas');
 			var ctx = canvas.getContext('2d');
 			
 			p1.animate();
@@ -101,9 +137,11 @@ Template.dashboard.rendered = function(){
 			ctx.fillText(p2Score.toString(),200,20);
 
 			ctx.font = "10px Consolas";
-		
+
+			/*
 			ctx.fillText("You",20,20);
-			ctx.fillText("CPU",280,20);
+			ctx.fillText("CPU",260,20);
+			*/
 
 			if(game){
 				// the ball
@@ -142,6 +180,7 @@ Template.dashboard.rendered = function(){
 				game = false;
 			}
 
+			/*
 			// moves cpu paddle up to catch ball
 			if(ball.y < p2.y && game){
 				if(ball.y >= p2.y && ball.y <= p2.height && ball.xVel > 0){
@@ -157,11 +196,11 @@ Template.dashboard.rendered = function(){
 				}else{
 					p2.yVel = 1;
 				}
-			}
+			}*/
 
 			// paddle 1
 			ctx.fillStyle = "red";
-			ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
+			ctx.fillRect(Session.get('p1x'),Session.get('p1y'),p1.width,p1.height);
 
 			// paddle 2
 			ctx.fillStyle = "blue";
@@ -188,7 +227,7 @@ Template.dashboard.rendered = function(){
 				ctx.fillRect(150,149,5,5);
 			}
 		
-	}
+		}
 
 		setTimeout(actionPerformed,10);
 		
@@ -286,7 +325,6 @@ Template.dashboard.rendered = function(){
 			break;
 		}
 	}
-
 
 }
 

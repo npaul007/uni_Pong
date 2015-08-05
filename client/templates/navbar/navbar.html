@@ -5,6 +5,11 @@
 			<div class="navbar-header"><h3>UNI-PONG</h3></div>
 			{{#if currentUser}}
 			<div class="navbar-right">
+				{{#with nickname}}
+					{{#with profile}}
+						<h3> Hello {{nickname}}!</h3>
+					{{/with}}
+				{{/with}}
 				<button id="logout-button" class="btn btn-default form-control">Logout</button>
 			</div>
 			{{/if}}

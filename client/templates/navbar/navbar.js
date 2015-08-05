@@ -5,6 +5,9 @@ Template.navbar.events({
 	}
 });
 
-Template.navbar.rendered = function(){
- 
-}
+Template.navbar.helpers({
+	nickname:function(){
+		var player = Meteor.users.find();
+		return player;
+	}
+});
