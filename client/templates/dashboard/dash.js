@@ -122,7 +122,7 @@ Template.dashboard.rendered = function(){
 				ctx.fillText("Press S to move down ",49,90);
 			}
 
-			if(p2Score === winningScore){
+			if(p2Score === 2){
 				win = "You Lose!";
 				play=" ";
 
@@ -131,19 +131,20 @@ Template.dashboard.rendered = function(){
 
 				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.losses":1}});
 
-				var wins = Meteor.user().find().profile.wins;
-				var losses = Meteor.user().find().profile.losses;
+				var wins = Meteor.user().profile.wins;
+				var losses = Meteor.user().profile.losses;
 
 				var games = wins + losses;
-				var pct = (wins/games);
+				var winningPercentage = (wins/games);
+				winningPercentage *=100;
 
-				Meteor.users.update({_id:Meteor.userId()} , {$set:{"profile.pct":pct}});
+				Meteor.users.update({_id:Meteor.userId()} , {$set:{"profile.pct":winningPercentage}});
 
 				on = false;
 				game = false;
 			}
 
-			if(p1Score === winningScore){
+			if(p1Score === 2){
 				play=" ";
 				win = "You Win!";
 
@@ -152,13 +153,14 @@ Template.dashboard.rendered = function(){
 
 				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.wins":1}});
 
-				var wins = Meteor.user().find().profile.wins;
-				var losses = Meteor.user().find().profile.losses;
+				var wins = Meteor.user().profile.wins;
+				var losses = Meteor.user().profile.losses;
 
 				var games = wins + losses;
-				var pct = (wins/games);
+				var winningPercentage = (wins/games);
+				winningPercentage *=100;
 
-				Meteor.users.update({_id:Meteor.userId()} , {$set:{"profile.pct":pct}});
+				Meteor.users.update({_id:Meteor.userId()} , {$set:{"profile.pct":winningPercentage}});
 
 				on = false;
 				game = false;
