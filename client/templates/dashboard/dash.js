@@ -137,7 +137,7 @@ Template.dashboard.rendered = function(){
 				var games = wins + losses;
 				var pct = (wins/games);
 
-				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.pct":pct}});
+				Meteor.users.update({_id:Meteor.userId()} , {$set:{"profile.pct":pct}});
 
 				on = false;
 				game = false;
@@ -158,7 +158,7 @@ Template.dashboard.rendered = function(){
 				var games = wins + losses;
 				var pct = (wins/games);
 
-				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.pct":pct}});
+				Meteor.users.update({_id:Meteor.userId()} , {$set:{"profile.pct":pct}});
 
 				on = false;
 				game = false;
