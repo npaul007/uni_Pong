@@ -1,20 +1,18 @@
 <template name="login">
 	<head>
 		<title>Welcome to UNI-PONG</title>
+		<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4"></div>
-				<div class="col-md-4"><h1 class="login-header">UNI-PONG</h1></div>
-				<div class="col-md-4"></div>
+				<div class="col-md-12"><h1 class="login-header">UNI-PONG</h1></div>
 			</div>
 
 			<div class="row">
-				<div class="col-md-4"></div>
-				<div class="col-md-4">
+				<div class="col-md-12">
+					<h2 id="form-header">Login to Play</h2>
 					<form class="login-form">
-						<h2>Login to Play</h2>
 						<p id="invalid" hidden>Invalid Email or Password</p>
 						<label for="">E-mail</label>
 						<input type="text" class="form-control" id="email">
