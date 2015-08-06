@@ -1,9 +1,20 @@
 .navbar{
-	border: 2px solid black;
+	border: 2px solid white;
+	background: black;
 	padding: 15px;
+}
+
+h1,h2,h3,p,li{
+	color: white;
 }
 
 .btn-nav{
 	width: 115px;
 	margin-right: 40px;
+	background: black;
+	color: white
+}
+
+body{
+	background: black;
 }
