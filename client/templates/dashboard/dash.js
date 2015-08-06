@@ -1,10 +1,13 @@
 Template.dashboard.rendered = function(){
 
+	$('.leaderboard').hide();
+
 	if(!Meteor.userId()){
 		window.location.href = "../"
 	}
 
 	var game = false;
+	var leaderboardShown = false;
 
 	var p1Up = false;
 	var p1Down = false;
@@ -23,6 +26,18 @@ Template.dashboard.rendered = function(){
 	on=true;
 
 	setTimeout(actionPerformed,10);
+
+	$('#leaderboard-redirect').click(function(){
+		if(leaderboardShown){
+			$('.leaderboard').hide();
+			leaderboardShown = false;
+			game = true;
+		}else{
+			$('.leaderboard').show();
+			leaderboardShown = true;
+			game = false;
+		}
+	});
 
 	function Ball(x,y,width,height,xVel,yVel){
 		this.x = x;
@@ -113,16 +128,20 @@ Template.dashboard.rendered = function(){
 			}
 
 			if(!game){
-				ctx.fillStyle = "white";
-				ctx.font = "15px Consolas";
-				ctx.fillText(play,49,60);
-				ctx.fillStyle = "green";
-				ctx.fillText("Press W to move up ",49,75);
-				ctx.fillStyle = "purple";
-				ctx.fillText("Press S to move down ",49,90);
+				if(!leaderboardShown){
+					ctx.fillStyle = "white";
+					ctx.font = "15px Consolas";
+					ctx.fillText(play,49,60);
+					ctx.fillStyle = "orange";
+					ctx.fillText("Press W to move up ",49,75);
+					ctx.fillStyle = "yellow";
+					ctx.fillText("Press S to move down ",49,90);
+					ctx.fillStyle = "pink";
+					ctx.fillText("Press R to restart the game ",49,105);
+				}
 			}
 
-			if(p2Score === 2){
+			if(p2Score === winningScore){
 				win = "You Lose!";
 				play=" ";
 
@@ -144,7 +163,7 @@ Template.dashboard.rendered = function(){
 				game = false;
 			}
 
-			if(p1Score === 2){
+			if(p1Score === winningScore){
 				play=" ";
 				win = "You Win!";
 
