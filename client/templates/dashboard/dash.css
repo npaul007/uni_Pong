@@ -2,9 +2,16 @@
 	margin-left: 80px;
 }
 
-#play-button{
-	width:500px;
-	margin-left: 110px;
-	margin-bottom: 15px;
-	margin-top: 15px;
+#myCanvas{
+	width: 1360px;
+	height: 512px;
+	background: black;
+}
+
+body{
+	font-family: lucida console;
+}
+
+#invalid{
+	color: red;
 }
