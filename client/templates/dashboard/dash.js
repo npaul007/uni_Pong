@@ -175,6 +175,12 @@ Template.dashboard.rendered = function(){
 				game = false;
 			}
 
+			if(leaderboardShown){
+				$('.leaderboard').show();
+			}else{
+				$('.leaderboard').hide();
+			}
+
 			// moves cpu paddle up to catch ball
 			if(ball.y < p2.y && game){
 				if(ball.y >= p2.y && ball.y <= p2.height && ball.xVel > 0){
@@ -258,7 +264,11 @@ Template.dashboard.rendered = function(){
 		switch(event.keyCode){
 			// l leaderboard
 			case 76:
-			leaderboardShown = true;
+				if(leaderboardShown){
+					leaderboardShown = false;
+				}else{
+					leaderboardShown = true;
+				}
 			break;
 
 			// r restart
