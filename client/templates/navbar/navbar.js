@@ -12,8 +12,7 @@ Template.navbar.events({
 });
 
 Template.navbar.helpers({
-	nickname:function(){
-		var player = Meteor.users.find();
-		return player;
-	}
+  nickname:function(){
+   return Meteor.user().profile.nickname;
+  }
 });
