@@ -27,18 +27,6 @@ Template.dashboard.rendered = function(){
 
 	setTimeout(actionPerformed,10);
 
-	$('#leaderboard-redirect').click(function(){
-		if(leaderboardShown){
-			$('.leaderboard').hide();
-			leaderboardShown = false;
-			game = true;
-		}else{
-			$('.leaderboard').show();
-			leaderboardShown = true;
-			game = false;
-		}
-	});
-
 	function Ball(x,y,width,height,xVel,yVel){
 		this.x = x;
 		this.y = y;
@@ -130,7 +118,7 @@ Template.dashboard.rendered = function(){
 			if(!game){
 				if(!leaderboardShown){
 					ctx.fillStyle = "white";
-					ctx.font = "15px Consolas";
+					ctx.font = "9px Consolas";
 					ctx.fillText(play,49,60);
 					ctx.fillStyle = "orange";
 					ctx.fillText("Press W to move up ",49,75);
@@ -138,6 +126,8 @@ Template.dashboard.rendered = function(){
 					ctx.fillText("Press S to move down ",49,90);
 					ctx.fillStyle = "pink";
 					ctx.fillText("Press R to restart the game ",49,105);
+					ctx.fillStyle = "cyan";
+					ctx.fillText("Press L to check out the leaderboard ",49,120);
 				}
 			}
 
@@ -266,14 +256,34 @@ Template.dashboard.rendered = function(){
 
 	document.onkeydown = function(event){
 		switch(event.keyCode){
+			// l leaderboard
+			case 76:
+			leaderboardShown = true;
+			break;
+
+			// r restart
+			case 82:
+				p2Score = 0;
+				p1Score= 0;
+				p1.y = 60;
+				p2.y = 60;
+				p2.yVel = 0;
+				ball.x = 120;
+				ball.y = 50;
+				ball.xVel = 2;
+				ball.yVel =1;
+			break;
+
+			// p pause
 			case 80:
 			if(game){
 				game = false;
-				p2.yVel=0;
+				p2.yVel = 0;
 			}else{
 				game = true;
 			}
 			break;
+
 			// w key
 			case 87:
 				p1Up = true;
@@ -282,6 +292,7 @@ Template.dashboard.rendered = function(){
 				}
 				p1.yVel = -2
 			break;
+
 			// s key
 			case 83:
 				p1Down = true;
@@ -290,6 +301,7 @@ Template.dashboard.rendered = function(){
 				}
 				p1.yVel = 2
 			break;
+
 			// up arrow
 			case 38:
 				p2Up = true;
@@ -298,6 +310,7 @@ Template.dashboard.rendered = function(){
 				}
 				p2.yVel = -2;
 			break;
+
 			// down arrow
 			case 40:
 				p2Down = true;
@@ -315,14 +328,17 @@ Template.dashboard.rendered = function(){
 			case 87:
 				p1.yVel = 0
 			break;
+
 			// s key
 			case 83:
 				p1.yVel = 0
 			break;
-				// up arrow
+
+			// up arrow
 			case 38:
 				p2.yVel = 0
 			break;
+
 			// down arrow
 			case 40:
 				p2.yVel = 0
