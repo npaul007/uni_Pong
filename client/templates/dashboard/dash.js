@@ -21,45 +21,49 @@ Template.dashboard.rendered = function(){
 	var play = "Press 'P' to Play!/Pause";
 	var win;
 
-	var winningScore = 10;
+	var wins;
+	var losses;
+	var games;
+
+	var winningScore = 2;
 
 	on=true;
 
 	setTimeout(actionPerformed,10);
 
-	function Ball(x,y,width,height,xVel,yVel){
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.xVel = xVel;
-		this.yVel = yVel;
-		this.collision = function(){
-			if(this.x > 330){
-				this.xVel *= -1;
-				p1Score++;
-				restart();
-			}
-
-			else if(this.x < 0){
-				this.xVel *= -1;
-				p2Score++;
-				restart();
-			}
-
-			else if(this.y < 0){
-				this.yVel *= -1;
-			}
-
-			else if(this.y > 150){
-				this.yVel *= -1;
-			}
+function Ball(x,y,width,height,xVel,yVel){
+	this.x = x;
+	this.y = y;
+	this.width = width;
+	this.height = height;
+	this.xVel = xVel;
+	this.yVel = yVel;
+	this.collision = function(){
+		if(this.x > 330){
+			this.xVel *= -1;
+			p1Score++;
+			restart();
 		}
-		this.animate = function(){
-			this.x+=this.xVel;
-			this.y+=this.yVel;
+
+		else if(this.x < 0){
+			this.xVel *= -1;
+			p2Score++;
+			restart();
+		}
+
+		else if(this.y < 0){
+			this.yVel *= -1;
+		}
+
+		else if(this.y > 150){
+			this.yVel *= -1;
 		}
 	}
+	this.animate = function(){
+		this.x+=this.xVel;
+		this.y+=this.yVel;
+	}
+}
 
 	function Paddle(x,y,xVel,yVel){
 		this.x = x;
@@ -140,11 +144,11 @@ Template.dashboard.rendered = function(){
 
 				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.losses":1}});
 
-				var wins = Meteor.user().profile.wins;
-				var losses = Meteor.user().profile.losses;
+				wins = Meteor.user().profile.wins;
+				losses = Meteor.user().profile.losses;
 
-				var games = wins + losses;
-				var winningPercentage = (wins/games);
+				games = wins + losses;
+				winningPercentage = (wins/games);
 				winningPercentage *=100;
 
 				Meteor.users.update({_id:Meteor.userId()} , {$set:{"profile.pct":winningPercentage}});
@@ -162,11 +166,11 @@ Template.dashboard.rendered = function(){
 
 				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.wins":1}});
 
-				var wins = Meteor.user().profile.wins;
-				var losses = Meteor.user().profile.losses;
+				wins = Meteor.user().profile.wins;
+				losses = Meteor.user().profile.losses;
 
-				var games = wins + losses;
-				var winningPercentage = (wins/games);
+				games = wins + losses;
+				winningPercentage = (wins/games);
 				winningPercentage *=100;
 
 				Meteor.users.update({_id:Meteor.userId()} , {$set:{"profile.pct":winningPercentage}});
@@ -267,7 +271,11 @@ Template.dashboard.rendered = function(){
 				if(leaderboardShown){
 					leaderboardShown = false;
 				}else{
-					leaderboardShown = true;
+					if(game){
+						leaderboardShown = false;
+					}else{
+						leaderboardShown = true;
+					}
 				}
 			break;
 
@@ -291,6 +299,7 @@ Template.dashboard.rendered = function(){
 				p2.yVel = 0;
 			}else{
 				game = true;
+				leaderboardShown = false;
 			}
 			break;
 
