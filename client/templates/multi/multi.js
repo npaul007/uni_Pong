@@ -1,8 +1,8 @@
 Template.multiplayer.rendered = function(){
-
+	/*
 	if(!Meteor.userId()){
 		window.location.href = "../"
-	}
+	}*/
 
 	var game = false;
 
@@ -105,7 +105,7 @@ Template.multiplayer.rendered = function(){
 	  });
 
 	}*/
-	pongStream = new Meteor.Stream('pong');
+
 
 	function actionPerformed(){
 		if(on){
@@ -172,18 +172,8 @@ Template.multiplayer.rendered = function(){
 			// paddle 1
 			ctx.fillStyle = "red";
 
-			pongStream.emit('displayp1XPosition', p1.x)
-			pongStream.emit('displayp1YPosition', p1.y)
-
-			pongStream.on('displayp1XPosition', function(xPosition) {
-				Session.set('p1x', p1xPosition);
-			});
-
-			pongStream.on('displayp1YPosition', function(yPosition) {
-				Session.set('p1y', p1yPosition);
-			});
-
-			ctx.fillRect(Session.get('p1x'), Session.get('p1y'), p1.width,p1.height);
+			Session.set('p1y',p1.y);
+			ctx.fillRect(p1.x, p1.y, p1.width,p1.height);
 
 			// paddle 2
 			ctx.fillStyle = "blue";
@@ -259,7 +249,7 @@ Template.multiplayer.rendered = function(){
 				if(p1Down){
 					p1Down = false;
 				}
-				p1.yVel = -2
+				p1.yVel = -2;
 			break;
 			// s key
 			case 83:
@@ -267,7 +257,7 @@ Template.multiplayer.rendered = function(){
 				if(p1Up){
 					p1Up = false;
 				}
-				p1.yVel = 2
+				p1.yVel = 2;
 			break;
 			// up arrow
 			case 38:
@@ -308,8 +298,4 @@ Template.multiplayer.rendered = function(){
 			break;
 		}
 	}
-
 }
-
-
-

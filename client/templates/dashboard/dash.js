@@ -25,45 +25,45 @@ Template.dashboard.rendered = function(){
 	var losses;
 	var games;
 
-	var winningScore = 2;
+	var winningScore = 3;
 
-	on=true;
+	var on = true;
 
 	setTimeout(actionPerformed,10);
 
-function Ball(x,y,width,height,xVel,yVel){
-	this.x = x;
-	this.y = y;
-	this.width = width;
-	this.height = height;
-	this.xVel = xVel;
-	this.yVel = yVel;
-	this.collision = function(){
-		if(this.x > 330){
-			this.xVel *= -1;
-			p1Score++;
-			restart();
-		}
+	function Ball(x,y,width,height,xVel,yVel){
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.xVel = xVel;
+		this.yVel = yVel;
+		this.collision = function(){
+			if(this.x > 330){
+				this.xVel *= -1;
+				p1Score++;
+				restart();
+			}
 
-		else if(this.x < 0){
-			this.xVel *= -1;
-			p2Score++;
-			restart();
-		}
+			else if(this.x < 0){
+				this.xVel *= -1;
+				p2Score++;
+				restart();
+			}
 
-		else if(this.y < 0){
-			this.yVel *= -1;
-		}
+			else if(this.y < 0){
+				this.yVel *= -1;
+			}
 
-		else if(this.y > 150){
-			this.yVel *= -1;
+			else if(this.y > 150){
+				this.yVel *= -1;
+			}
+		}
+		this.animate = function(){
+			this.x+=this.xVel;
+			this.y+=this.yVel;
 		}
 	}
-	this.animate = function(){
-		this.x+=this.xVel;
-		this.y+=this.yVel;
-	}
-}
 
 	function Paddle(x,y,xVel,yVel){
 		this.x = x;
@@ -231,10 +231,9 @@ function Ball(x,y,width,height,xVel,yVel){
 				ctx.fillRect(150,149,5,5);
 			}
 		
-	}
+		}
 
 		setTimeout(actionPerformed,10);
-		
 
 	}
 
