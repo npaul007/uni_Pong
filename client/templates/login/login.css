@@ -24,7 +24,7 @@
 
 input{
 	color: white;
-	background: black
+	background: black;
 	border: 1px solid white;
 }
 
@@ -36,4 +36,8 @@ input{
 #email , #password , #nickname{
 	background: black;
 	color: white;
+}
+
+#reg{
+	text-align: center;
 }

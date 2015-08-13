@@ -13,10 +13,11 @@ mrt:bootstrap-3
 accounts-ui
 accounts-password
 email
-arunoda:streams
 autopublish
 meteorhacks:npm
 mrt:moment
 
 
 npm-container
+arunoda:streams
+insecure
