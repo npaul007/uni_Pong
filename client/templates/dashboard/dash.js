@@ -136,6 +136,11 @@ Template.dashboard.rendered = function(){
 			}
 
 			if(p2Score === winningScore){
+				ctx.clearRect(0,0,canvas.width,canvas.height);
+
+				ctx.font = "23px Consolas";
+				ctx.fillText(p1Score.toString(),100,20);
+				ctx.fillText(p2Score.toString(),200,20);
 
 				win = "You Lose!";
 				play=" ";
@@ -159,6 +164,11 @@ Template.dashboard.rendered = function(){
 			}
 
 			if(p1Score === winningScore){
+				ctx.clearRect(0,0,canvas.width,canvas.height);
+				
+				ctx.font = "23px Consolas";
+				ctx.fillText(p1Score.toString(),100,20);
+				ctx.fillText(p2Score.toString(),200,20);
 
 				play=" ";
 				win = "You Win!";
