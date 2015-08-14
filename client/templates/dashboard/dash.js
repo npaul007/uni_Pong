@@ -25,8 +25,6 @@ Template.dashboard.rendered = function(){
 	var losses;
 	var games;
 
-	var nickname= Meteor.user().profile.nickname;
-
 	var winningScore = 10;
 
 	var on = true;
@@ -111,7 +109,7 @@ Template.dashboard.rendered = function(){
 
 			ctx.font = "10px Consolas";
 		
-			ctx.fillText(nickname,20,20);
+			ctx.fillText("You",20,20);
 			ctx.fillText("CPU",265,20);
 
 			if(game){
