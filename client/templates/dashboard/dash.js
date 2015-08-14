@@ -109,7 +109,7 @@ Template.dashboard.rendered = function(){
 
 			ctx.font = "10px Consolas";
 		
-			ctx.fillText("You",20,20);
+			ctx.fillText(Meteor.user().profile.nickname,20,20);
 			ctx.fillText("CPU",265,20);
 
 			if(game){
