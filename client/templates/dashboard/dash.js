@@ -25,6 +25,8 @@ Template.dashboard.rendered = function(){
 	var losses;
 	var games;
 
+	var nickname= Meteor.user().profile.nickname;
+
 	var winningScore = 10;
 
 	var on = true;
@@ -109,7 +111,7 @@ Template.dashboard.rendered = function(){
 
 			ctx.font = "10px Consolas";
 		
-			ctx.fillText(Meteor.user().profile.nickname,20,20);
+			ctx.fillText(nickname,20,20);
 			ctx.fillText("CPU",265,20);
 
 			if(game){
@@ -136,11 +138,6 @@ Template.dashboard.rendered = function(){
 			}
 
 			if(p2Score === winningScore){
-				ctx.clearRect(0,0,canvas.width,canvas.height);
-
-				ctx.font = "23px Consolas";
-				ctx.fillText(p1Score.toString(),100,20);
-				ctx.fillText(p2Score.toString(),200,20);
 
 				win = "You Lose!";
 				play=" ";
@@ -164,11 +161,6 @@ Template.dashboard.rendered = function(){
 			}
 
 			if(p1Score === winningScore){
-				ctx.clearRect(0,0,canvas.width,canvas.height);
-				
-				ctx.font = "23px Consolas";
-				ctx.fillText(p1Score.toString(),100,20);
-				ctx.fillText(p2Score.toString(),200,20);
 
 				play=" ";
 				win = "You Win!";

@@ -9,11 +9,13 @@
 			<div class="col-md-4">
 				<h1>Leaderboard</h1>
 				<div class="block">
-				{{#each users}}
-					{{#with profile}}
-						<p>{{nickname}} <strong>{{wins}}-{{losses}}</strong></p>
-					{{/with}}
-				{{/each}}
+					{{#each users}}
+						<div class="result">
+						{{#with profile}}
+							<p>{{nickname}} <strong>{{wins}}-{{losses}}</strong></p>
+						{{/with}}
+						</div>
+					{{/each}}
 				</div>
 			</div>
 			<div class="col-md-4"></div>	
