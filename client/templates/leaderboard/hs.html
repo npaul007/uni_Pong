@@ -4,18 +4,24 @@
 	</head>
 	<body>
 		<div class="leaderboard">
+			
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
 				<h1>Leaderboard</h1>
-				<ol>
+				<div class="block">
+		
 					{{#each users}}
+						<div class="result">
 						{{#with profile}}
-							<li>{{nickname}} <strong>{{wins}}-{{losses}}</strong></li>
+							<p>{{nickname}} <strong>{{wins}}-{{losses}}</strong></p>
 						{{/with}}
+						</div>
 					{{/each}}
-				</ol>
+			
+				</div>
 			</div>
 			<div class="col-md-4"></div>	
+			
 		</div>
 	</body>
 </template>

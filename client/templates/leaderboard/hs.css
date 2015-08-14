@@ -1,4 +1,14 @@
 .leaderboard{
 	position: relative;
-	top: -400px;
+	top: -450px;
+}
+
+.block{
+	border: 1px solid white;
+	padding: 5px;
+}
+
+.result{
+	border: 1px solid white;
+	padding: 15px;
 }
