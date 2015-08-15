@@ -13,7 +13,6 @@ mrt:bootstrap-3
 accounts-ui
 accounts-password
 email
-autopublish
 meteorhacks:npm
 mrt:moment
 

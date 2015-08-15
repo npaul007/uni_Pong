@@ -9,5 +9,6 @@ if(Meteor.isClient) {
   chatStream.on('message', function(message) {
     console.log('user: ' + message);
   });
+
 }
 
