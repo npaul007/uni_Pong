@@ -109,8 +109,11 @@ Template.multiplayer.rendered = function(){
 			ctx.fillText("CPU",260,20);
 			*/
 
+			pongStream.on('game',function(bool){
+				game = bool;
+			});
+
 			if(game){
-				// the ball
 				ball.animate();
 				ball.collision();
 				ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
@@ -233,6 +236,7 @@ Template.multiplayer.rendered = function(){
 			}else{
 				game = true;
 			}
+			pongStream.emit('game', game);
 			break;
 			// w key
 			case 87:
@@ -241,9 +245,8 @@ Template.multiplayer.rendered = function(){
 					p1Down = false;
 				}
 				p1.yVel = -2;
-				if(Meteor.isClient){
-					pongStream.emit('p1V',p1.yVel,p1.y);
-				}
+				pongStream.emit('p1V',p1.yVel,p1.y);
+				
 			break;
 			// s key
 			case 83:
@@ -252,9 +255,7 @@ Template.multiplayer.rendered = function(){
 					p1Up = false;
 				}
 				p1.yVel = 2;
-				if(Meteor.isClient){
-					pongStream.emit('p1V',p1.yVel,p1.y);
-				}
+				pongStream.emit('p1V',p1.yVel,p1.y);
 			break;
 			// up arrow
 			case 38:
@@ -263,9 +264,7 @@ Template.multiplayer.rendered = function(){
 					p2Down = false;
 				}
 				p2.yVel = -2;
-				if(Meteor.isClient){
-					pongStream.emit('p2V',p2.yVel,p2.y);
-				}
+				pongStream.emit('p2V',p2.yVel,p2.y);
 			break;
 			// down arrow
 			case 40:
@@ -274,9 +273,7 @@ Template.multiplayer.rendered = function(){
 					p2Up = false;
 				}
 				p2.yVel = 2;
-				if(Meteor.isClient){
-					pongStream.emit('p2V',p2.yVel,p2.y);
-				}
+				pongStream.emit('p2V',p2.yVel,p2.y);
 			break;
 		}
 	}
@@ -285,31 +282,23 @@ Template.multiplayer.rendered = function(){
 		switch(event.keyCode){
 			// w key
 			case 87:
-				p1.yVel = 0
-				if(Meteor.isClient){
-					pongStream.emit('p1V',p1.yVel,p1.y);
-				}
+				p1.yVel = 0;
+				pongStream.emit('p1V',p1.yVel,p1.y);
 			break;
 			// s key
 			case 83:
-				p1.yVel = 0
-				if(Meteor.isClient){
-					pongStream.emit('p1V',p1.yVel,p1.y);
-				}
+				p1.yVel = 0;
+				pongStream.emit('p1V',p1.yVel,p1.y);
 			break;
 				// up arrow
 			case 38:
-				p2.yVel = 0
-				if(Meteor.isClient){
-					pongStream.emit('p2V',p2.yVel,p2.y);
-				}
+				p2.yVel = 0;
+				pongStream.emit('p2V',p2.yVel,p2.y);
 			break;
 			// down arrow
 			case 40:
-				p2.yVel = 0
-				if(Meteor.isClient){
-					pongStream.emit('p2V',p2.yVel,p2.y);
-				}
+				p2.yVel = 0;
+				pongStream.emit('p2V',p2.yVel,p2.y);
 			break;
 		}
 	}
