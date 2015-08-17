@@ -206,7 +206,8 @@ Template.multiplayer.rendered = function(){
 			if(ball.y >= p1.y && ball.y <= p1.height+p1.y){
 				if(p1Up){
 					ball.yVel = -1;
-				}else if(p1Down){
+				}
+				else if(p1Down){
 					ball.yVel = 1;
 				}
 				ball.xVel *= -1;
@@ -219,7 +220,8 @@ Template.multiplayer.rendered = function(){
 			if(ball.y >= p2.y && ball.y <= p2.height+p2.y){
 				if(p2Up){
 					ball.yVel = -1;
-				}else if(p2Down){
+				}
+				else if(p2Down){
 					ball.yVel = 1;
 				}
 				ball.xVel *= -1;
