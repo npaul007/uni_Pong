@@ -174,8 +174,11 @@ Template.multiplayer.rendered = function(){
 			// paddle 1
 			ctx.fillStyle = "red";
 
-			pongStream.on('p1',function(p1Position){
-				p1.yVel = p1Position;
+			pongStream.on('p1V',function(p1Vel,p1Y){
+				p1.yVel = p1Vel;
+				if(p1.y != p1Y){
+					p1.y = p1Y;
+				}
 			});
 			
 			ctx.fillRect(p1.x, p1.y, p1.width,p1.height);
@@ -255,7 +258,9 @@ Template.multiplayer.rendered = function(){
 					p1Down = false;
 				}
 				p1.yVel = -2;
-				pongStream.emit('p1',p1.yVel);
+				if(Meteor.isClient){
+					pongStream.emit('p1V',p1.yVel,p1.y);
+				}
 			break;
 			// s key
 			case 83:
@@ -264,7 +269,9 @@ Template.multiplayer.rendered = function(){
 					p1Up = false;
 				}
 				p1.yVel = 2;
-				pongStream.emit('p1',p1.yVel);
+				if(Meteor.isClient){
+					pongStream.emit('p1V',p1.yVel,p1.y);
+				}
 			break;
 			// up arrow
 			case 38:
@@ -290,12 +297,16 @@ Template.multiplayer.rendered = function(){
 			// w key
 			case 87:
 				p1.yVel = 0
-				pongStream.emit('p1',p1.yVel);
+				if(Meteor.isClient){
+					pongStream.emit('p1V',p1.yVel,p1.y);
+				}
 			break;
 			// s key
 			case 83:
 				p1.yVel = 0
-				pongStream.emit('p1',p1.yVel);
+				if(Meteor.isClient){
+					pongStream.emit('p1V',p1.yVel,p1.y);
+				}
 			break;
 				// up arrow
 			case 38:
