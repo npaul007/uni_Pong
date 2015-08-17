@@ -84,31 +84,6 @@ Template.multiplayer.rendered = function(){
 	var p1 = new Paddle(5,60,0,0);
 	var p2 = new Paddle(285,60,0,0);
 
-	// live stream for multiplayer
-	
-	/*
-	if (Meteor.isClient) {
-
-	  pongStream.on('displayp1XPosition', function(xPosition) {
-	    Session.set('p1x', p1xPosition);
-	  });
-
-	  pongStream.on('displayp1YPosition', function(yPosition) {
-	    Session.set('p1y', p1yPosition);
-	  });
-
-	  Template.multiplayer.events({
-	    
-	   updateCanvas: function(event) {
-	      pongStream.emit('displayp1XPosition', p1.x)
-	      pongStream.emit('displayp1YPosition', p1.y)
-	    }
-
-	  });
-
-	}*/
-
-
 	function actionPerformed(){
 		if(on){
 			var canvas = document.getElementById('multiCanvas');
@@ -185,6 +160,14 @@ Template.multiplayer.rendered = function(){
 
 			// paddle 2
 			ctx.fillStyle = "blue";
+
+			pongStream.on('p2V',function(p2Vel,p2Y){
+				p2.yVel = p2Vel;
+				if(p2.y != p2Y){
+					p2.y = p2Y;
+				}
+			});
+
 			ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
 
 			// dashed line down center
@@ -280,6 +263,9 @@ Template.multiplayer.rendered = function(){
 					p2Down = false;
 				}
 				p2.yVel = -2;
+				if(Meteor.isClient){
+					pongStream.emit('p2V',p2.yVel,p2.y);
+				}
 			break;
 			// down arrow
 			case 40:
@@ -288,6 +274,9 @@ Template.multiplayer.rendered = function(){
 					p2Up = false;
 				}
 				p2.yVel = 2;
+				if(Meteor.isClient){
+					pongStream.emit('p2V',p2.yVel,p2.y);
+				}
 			break;
 		}
 	}
@@ -311,10 +300,16 @@ Template.multiplayer.rendered = function(){
 				// up arrow
 			case 38:
 				p2.yVel = 0
+				if(Meteor.isClient){
+					pongStream.emit('p2V',p2.yVel,p2.y);
+				}
 			break;
 			// down arrow
 			case 40:
 				p2.yVel = 0
+				if(Meteor.isClient){
+					pongStream.emit('p2V',p2.yVel,p2.y);
+				}
 			break;
 		}
 	}
