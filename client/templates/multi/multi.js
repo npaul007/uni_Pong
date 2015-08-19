@@ -1,11 +1,6 @@
 Template.multiplayer.rendered = function(){
 	pongStream = new Meteor.Stream('pong');
 
-	/*
-	if(!Meteor.userId()){
-		window.location.href = "../"
-	}*/
-
 	var game = false;
 
 	var p1Up = false;
@@ -20,11 +15,11 @@ Template.multiplayer.rendered = function(){
 	var play = "Press 'P' to Play!";
 	var win;
 
-	var winningScore = 15;
+	var winningScore = 5;
 
 	on=true;
 
-	setTimeout(actionPerformed,10);
+	setTimeout(actionPerformed,25);
 
 	function Ball(x,y,width,height,xVel,yVel){
 		this.x = x;
@@ -38,12 +33,16 @@ Template.multiplayer.rendered = function(){
 				this.xVel *= -1;
 				p1Score++;
 				restart();
+				pongStream.emit('score',p1Score,p2Score);
+				pongStream.emit('ball',ball.xVel,ball.x,ball.y);
 			}
 
 			else if(this.x < 0){
 				this.xVel *= -1;
 				p2Score++;
 				restart();
+				pongStream.emit('score',p1Score,p2Score);
+				pongStream.emit('ball',ball.xVel,ball.x,ball.y);
 			}
 
 			else if(this.y < 0){
@@ -80,7 +79,7 @@ Template.multiplayer.rendered = function(){
 		p2.y = p1.y;
 	}
 
-	var ball = new Ball(120,50,3,3,2,1);
+	var ball = new Ball(120,50,3,3,1,.5);
 	var p1 = new Paddle(5,60,0,0);
 	var p2 = new Paddle(285,60,0,0);
 
@@ -95,8 +94,10 @@ Template.multiplayer.rendered = function(){
 			p1Collsion();
 			p2Collsion();
 
+			// clear screen to repaint
 			ctx.clearRect(0,0,canvas.width,canvas.height);
 
+			// painting scores
 			ctx.fillStyle = "white";
 			ctx.font = "23px Consolas";
 			ctx.fillText(p1Score.toString(),100,20);
@@ -109,8 +110,35 @@ Template.multiplayer.rendered = function(){
 			ctx.fillText("CPU",260,20);
 			*/
 
+			pongStream.on('score',function(p1,p2){
+				p1Score = p1;
+				p2Score = p2;
+			});
+
 			pongStream.on('game',function(bool){
 				game = bool;
+			});
+
+			pongStream.on('ball',function(bxVel,bx,by){
+				ball.xVel = bxVel;
+				if(ball.x != bx && ball.y != by){
+					ball.x = bx;
+					ball.y = by;
+				}
+			});
+
+			pongStream.on('p1V',function(p1Vel,p1Y){
+				p1.yVel = p1Vel;
+				if(p1.y != p1Y){
+					p1.y = p1Y;
+				}
+			});
+
+			pongStream.on('p2V',function(p2Vel,p2Y){
+				p2.yVel = p2Vel;
+				if(p2.y != p2Y){
+					p2.y = p2Y;
+				}
 			});
 
 			if(game){
@@ -126,6 +154,12 @@ Template.multiplayer.rendered = function(){
 			}
 
 			if(p2Score === winningScore){
+				ctx.clearRect(0,0,canvas.width,canvas.height);
+
+				ctx.font = "23px Consolas";
+				ctx.fillText(p1Score.toString(),100,20);
+				ctx.fillText(p2Score.toString(),200,20);
+
 				win = "You Lose!";
 				play=" ";
 
@@ -138,6 +172,12 @@ Template.multiplayer.rendered = function(){
 			}
 
 			if(p1Score === winningScore){
+				ctx.clearRect(0,0,canvas.width,canvas.height);
+
+				ctx.font = "23px Consolas";
+				ctx.fillText(p1Score.toString(),100,20);
+				ctx.fillText(p2Score.toString(),200,20);
+				
 				play=" ";
 				win = "You Win!";
 
@@ -151,26 +191,10 @@ Template.multiplayer.rendered = function(){
 
 			// paddle 1
 			ctx.fillStyle = "red";
-
-			pongStream.on('p1V',function(p1Vel,p1Y){
-				p1.yVel = p1Vel;
-				if(p1.y != p1Y){
-					p1.y = p1Y;
-				}
-			});
-			
 			ctx.fillRect(p1.x, p1.y, p1.width,p1.height);
 
 			// paddle 2
 			ctx.fillStyle = "blue";
-
-			pongStream.on('p2V',function(p2Vel,p2Y){
-				p2.yVel = p2Vel;
-				if(p2.y != p2Y){
-					p2.y = p2Y;
-				}
-			});
-
 			ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
 
 			// dashed line down center
@@ -196,7 +220,7 @@ Template.multiplayer.rendered = function(){
 		
 		}
 
-		setTimeout(actionPerformed,10);
+		setTimeout(actionPerformed,25);
 		
 
 	}
@@ -207,9 +231,11 @@ Template.multiplayer.rendered = function(){
 				if(p1Up){
 					ball.yVel = -1;
 				}
+
 				else if(p1Down){
 					ball.yVel = 1;
 				}
+
 				ball.xVel *= -1;
 			}
 		}
@@ -232,13 +258,13 @@ Template.multiplayer.rendered = function(){
 	document.onkeydown = function(event){
 		switch(event.keyCode){
 			case 80:
-			if(game){
-				game = false;
-				p2.yVel=0;
-			}else{
-				game = true;
-			}
-			pongStream.emit('game', game);
+				if(game){
+					game = false;
+					p2.yVel=0;
+				}else{
+					game = true;
+				}
+				pongStream.emit('game', game);
 			break;
 			// w key
 			case 87:
@@ -248,7 +274,6 @@ Template.multiplayer.rendered = function(){
 				}
 				p1.yVel = -2;
 				pongStream.emit('p1V',p1.yVel,p1.y);
-				
 			break;
 			// s key
 			case 83:

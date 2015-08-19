@@ -208,7 +208,7 @@ Template.dashboard.rendered = function(){
 					p2.yVel = -1;
 				}
 			}
-
+			// moves paddle down to catch ball
 			else if(ball.y > p2.y && game){
 
 				if(ball.y >= p2.y && ball.y <= p2.height && ball.xVel > 0){

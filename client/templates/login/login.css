@@ -15,12 +15,17 @@
 }
 
 .login-button{
-	width: 90px;
-	margin-left: 90px;
+	width: 230px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .register-link-button{
-	width: 330px;
+	width: 230px;
+}
+
+.buttons{
+	margin-left: 30px;
 }
 
 input{
