@@ -25,7 +25,7 @@ Template.dashboard.rendered = function(){
 	var losses;
 	var games;
 
-	var winningScore = 3;
+	var winningScore = 10;
 
 	var on = true;
 
@@ -146,7 +146,7 @@ Template.dashboard.rendered = function(){
 				play=" ";
 
 				ctx.font = "23px Consolas";
-				ctx.fillText(win,45,100);
+				ctx.fillText(win,101,70);
 
 				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.losses":1}});
 
@@ -174,7 +174,7 @@ Template.dashboard.rendered = function(){
 				win = "You Win!";
 
 				ctx.font = "23px Consolas";
-				ctx.fillText(win,45,100);
+				ctx.fillText(win,101,70);
 
 				Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.wins":1}});
 
