@@ -15,7 +15,11 @@ Template.multiplayer.rendered = function(){
 	var play = "Press 'P' to Play!";
 	var win;
 
+<<<<<<< HEAD
 	var winningScore = 10;
+=======
+	var winningScore = 5;
+>>>>>>> 8d090409a5b8e79c4373f7fc42dfe00aaead7c4a
 
 	on=true;
 
@@ -34,7 +38,11 @@ Template.multiplayer.rendered = function(){
 				p1Score++;
 				restart();
 				pongStream.emit('score',p1Score,p2Score);
+<<<<<<< HEAD
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+=======
+				pongStream.emit('ball',ball.xVel,ball.x,ball.y);
+>>>>>>> 8d090409a5b8e79c4373f7fc42dfe00aaead7c4a
 			}
 
 			else if(this.x < 0){
@@ -42,7 +50,11 @@ Template.multiplayer.rendered = function(){
 				p2Score++;
 				restart();
 				pongStream.emit('score',p1Score,p2Score);
+<<<<<<< HEAD
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+=======
+				pongStream.emit('ball',ball.xVel,ball.x,ball.y);
+>>>>>>> 8d090409a5b8e79c4373f7fc42dfe00aaead7c4a
 			}
 
 			else if(this.y < 0){
@@ -273,7 +285,11 @@ Template.multiplayer.rendered = function(){
 				if(p1Down){
 					p1Down = false;
 				}
+<<<<<<< HEAD
 				p1.yVel = -4;
+=======
+				p1.yVel = -2;
+>>>>>>> 8d090409a5b8e79c4373f7fc42dfe00aaead7c4a
 				pongStream.emit('p1V',p1.yVel,p1.y);
 			break;
 			// s key
@@ -282,7 +298,11 @@ Template.multiplayer.rendered = function(){
 				if(p1Up){
 					p1Up = false;
 				}
+<<<<<<< HEAD
 				p1.yVel = 4;
+=======
+				p1.yVel = 2;
+>>>>>>> 8d090409a5b8e79c4373f7fc42dfe00aaead7c4a
 				pongStream.emit('p1V',p1.yVel,p1.y);
 			break;
 			// up arrow
@@ -291,7 +311,11 @@ Template.multiplayer.rendered = function(){
 				if(p2Down){
 					p2Down = false;
 				}
+<<<<<<< HEAD
 				p2.yVel = -4;
+=======
+				p2.yVel = -2;
+>>>>>>> 8d090409a5b8e79c4373f7fc42dfe00aaead7c4a
 				pongStream.emit('p2V',p2.yVel,p2.y);
 			break;
 			// down arrow
@@ -300,7 +324,11 @@ Template.multiplayer.rendered = function(){
 				if(p2Up){
 					p2Up = false;
 				}
+<<<<<<< HEAD
 				p2.yVel = 4;
+=======
+				p2.yVel = 2;
+>>>>>>> 8d090409a5b8e79c4373f7fc42dfe00aaead7c4a
 				pongStream.emit('p2V',p2.yVel,p2.y);
 			break;
 		}
