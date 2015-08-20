@@ -15,7 +15,7 @@ Template.multiplayer.rendered = function(){
 	var play = "Press 'P' to Play!";
 	var win;
 
-	var winningScore = 5;
+	var winningScore = 10;
 
 	on=true;
 
@@ -34,7 +34,7 @@ Template.multiplayer.rendered = function(){
 				p1Score++;
 				restart();
 				pongStream.emit('score',p1Score,p2Score);
-				pongStream.emit('ball',ball.xVel,ball.x,ball.y);
+				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 			}
 
 			else if(this.x < 0){
@@ -42,7 +42,7 @@ Template.multiplayer.rendered = function(){
 				p2Score++;
 				restart();
 				pongStream.emit('score',p1Score,p2Score);
-				pongStream.emit('ball',ball.xVel,ball.x,ball.y);
+				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 			}
 
 			else if(this.y < 0){
@@ -79,7 +79,7 @@ Template.multiplayer.rendered = function(){
 		p2.y = p1.y;
 	}
 
-	var ball = new Ball(120,50,3,3,1,.5);
+	var ball = new Ball(120,50,3,3,4,2);
 	var p1 = new Paddle(5,60,0,0);
 	var p2 = new Paddle(285,60,0,0);
 
@@ -119,8 +119,9 @@ Template.multiplayer.rendered = function(){
 				game = bool;
 			});
 
-			pongStream.on('ball',function(bxVel,bx,by){
+			pongStream.on('ball',function(bxVel,byVel,bx,by){
 				ball.xVel = bxVel;
+				ball.yVel = byVel;
 				if(ball.x != bx && ball.y != by){
 					ball.x = bx;
 					ball.y = by;
@@ -272,7 +273,7 @@ Template.multiplayer.rendered = function(){
 				if(p1Down){
 					p1Down = false;
 				}
-				p1.yVel = -2;
+				p1.yVel = -4;
 				pongStream.emit('p1V',p1.yVel,p1.y);
 			break;
 			// s key
@@ -281,7 +282,7 @@ Template.multiplayer.rendered = function(){
 				if(p1Up){
 					p1Up = false;
 				}
-				p1.yVel = 2;
+				p1.yVel = 4;
 				pongStream.emit('p1V',p1.yVel,p1.y);
 			break;
 			// up arrow
@@ -290,7 +291,7 @@ Template.multiplayer.rendered = function(){
 				if(p2Down){
 					p2Down = false;
 				}
-				p2.yVel = -2;
+				p2.yVel = -4;
 				pongStream.emit('p2V',p2.yVel,p2.y);
 			break;
 			// down arrow
@@ -299,7 +300,7 @@ Template.multiplayer.rendered = function(){
 				if(p2Up){
 					p2Up = false;
 				}
-				p2.yVel = 2;
+				p2.yVel = 4;
 				pongStream.emit('p2V',p2.yVel,p2.y);
 			break;
 		}
