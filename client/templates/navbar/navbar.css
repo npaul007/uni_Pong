@@ -34,5 +34,13 @@ body{
 }
 
 #logout-button{
-	margin-left:80px;
+	margin-left:320px;
+	margin-top: -80px;
+	position: relative;
 }
+
+.loggedin-as{
+	margin-right: 100px;
+	position: relative;
+}
+
