@@ -31,18 +31,16 @@ Template.multiplayer.rendered = function(){
 		this.collision = function(){
 			if(this.x > 330){
 				this.xVel *= -1;
-				p1Score++;
-				restart();
+				p1Score+=1;
 				pongStream.emit('score',p1Score,p2Score);
-				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+				restart();
 			}
 
 			else if(this.x < 0){
 				this.xVel *= -1;
-				p2Score++;
-				restart();
+				p2Score+=1;
 				pongStream.emit('score',p1Score,p2Score);
-				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+				restart();
 			}
 
 			else if(this.y < 0){
@@ -117,15 +115,6 @@ Template.multiplayer.rendered = function(){
 
 			pongStream.on('game',function(bool){
 				game = bool;
-			});
-
-			pongStream.on('ball',function(bxVel,byVel,bx,by){
-				ball.xVel = bxVel;
-				ball.yVel = byVel;
-				if(ball.x != bx && ball.y != by){
-					ball.x = bx;
-					ball.y = by;
-				}
 			});
 
 			pongStream.on('p1V',function(p1Vel,p1Y){
@@ -238,6 +227,15 @@ Template.multiplayer.rendered = function(){
 				}
 
 				ball.xVel *= -1;
+				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+				pongStream.on('ball',function(bxVel,byVel,bx,by){
+					if(ball.x != bx || ball.y != by){
+						ball.x - bx;
+						ball.y = by;
+					}
+					ball.xVel = bxVel;
+					ball.yVel = byVel;
+				});
 			}
 		}
 	}
@@ -252,6 +250,15 @@ Template.multiplayer.rendered = function(){
 					ball.yVel = 1;
 				}
 				ball.xVel *= -1;
+				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+				pongStream.on('ball',function(bxVel,byVel,bx,by){
+					if(ball.x != bx || ball.y != by){
+						ball.x - bx;
+						ball.y = by;
+					}
+					ball.xVel = bxVel;
+					ball.yVel = byVel;
+				});
 			}
 		}
 	}
