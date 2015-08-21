@@ -34,14 +34,27 @@ body{
 }
 
 #logout-button{
+	right: -361px;
 	margin-left:620px;
-	margin-top: -47px;
+	margin-top: -189px;
 	position: relative;
 }
 
+#multi-button{
+	position: relative;
+	top: -55px;
+    right: -192px;
+}
+
+#cpu-button{
+	position: relative;
+	top: -14px;
+    right: -22px;
+}
+
 .loggedin-as{
-	margin-left: 110px;
-	top: 9px;
+	margin-left: 477px;
+	top: -54px;
 	position: relative;
 }
 

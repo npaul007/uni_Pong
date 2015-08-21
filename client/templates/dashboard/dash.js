@@ -25,7 +25,7 @@ Template.dashboard.rendered = function(){
 	var losses;
 	var games;
 
-	var winningScore = 10;
+	var winningScore = 3;
 
 	var on = true;
 

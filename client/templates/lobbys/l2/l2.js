@@ -1,5 +1,5 @@
-Template.multiplayer.rendered = function(){
-	pongStream = new Meteor.Stream('pong');
+Template.l2.rendered = function(){
+	lobbyTwo = new Meteor.Stream('l2');
 
 	var game = false;
 
@@ -32,14 +32,14 @@ Template.multiplayer.rendered = function(){
 			if(this.x > 330){
 				this.xVel *= -1;
 				p1Score+=1;
-				pongStream.emit('score',p1Score,p2Score);
+				lobbyTwo.emit('score',p1Score,p2Score);
 				restart();
 			}
 
 			else if(this.x < 0){
 				this.xVel *= -1;
 				p2Score+=1;
-				pongStream.emit('score',p1Score,p2Score);
+				lobbyTwo.emit('score',p1Score,p2Score);
 				restart();
 			}
 
@@ -108,23 +108,23 @@ Template.multiplayer.rendered = function(){
 			ctx.fillText("CPU",260,20);
 			*/
 
-			pongStream.on('score',function(p1,p2){
+			lobbyTwo.on('score',function(p1,p2){
 				p1Score = p1;
 				p2Score = p2;
 			});
 
-			pongStream.on('game',function(bool){
+			lobbyTwo.on('game',function(bool){
 				game = bool;
 			});
 
-			pongStream.on('p1V',function(p1Vel,p1Y){
+			lobbyTwo.on('p1V',function(p1Vel,p1Y){
 				p1.yVel = p1Vel;
 				if(p1.y != p1Y){
 					p1.y = p1Y;
 				}
 			});
 
-			pongStream.on('p2V',function(p2Vel,p2Y){
+			lobbyTwo.on('p2V',function(p2Vel,p2Y){
 				p2.yVel = p2Vel;
 				if(p2.y != p2Y){
 					p2.y = p2Y;
@@ -150,7 +150,7 @@ Template.multiplayer.rendered = function(){
 				ctx.fillText(p1Score.toString(),100,20);
 				ctx.fillText(p2Score.toString(),200,20);
 
-				win = "You Lose!";
+				win = "Game Over";
 				play=" ";
 
 				ctx.font = "23px Consolas";
@@ -169,7 +169,7 @@ Template.multiplayer.rendered = function(){
 				ctx.fillText(p2Score.toString(),200,20);
 				
 				play=" ";
-				win = "You Win!";
+				win = "Game Over";
 
 				ctx.font = "23px Consolas";
 				ctx.fillText(win,101,70);
@@ -227,8 +227,8 @@ Template.multiplayer.rendered = function(){
 				}
 
 				ball.xVel *= -1;
-				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
-				pongStream.on('ball',function(bxVel,byVel,bx,by){
+				lobbyTwo.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+				lobbyTwo.on('ball',function(bxVel,byVel,bx,by){
 					if(ball.x != bx || ball.y != by){
 						ball.x - bx;
 						ball.y = by;
@@ -250,8 +250,8 @@ Template.multiplayer.rendered = function(){
 					ball.yVel = 1;
 				}
 				ball.xVel *= -1;
-				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
-				pongStream.on('ball',function(bxVel,byVel,bx,by){
+				lobbyTwo.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+				lobbyTwo.on('ball',function(bxVel,byVel,bx,by){
 					if(ball.x != bx || ball.y != by){
 						ball.x - bx;
 						ball.y = by;
@@ -272,7 +272,7 @@ Template.multiplayer.rendered = function(){
 				}else{
 					game = true;
 				}
-				pongStream.emit('game', game);
+				lobbyTwo.emit('game', game);
 			break;
 			// w key
 			case 87:
@@ -281,7 +281,7 @@ Template.multiplayer.rendered = function(){
 					p1Down = false;
 				}
 				p1.yVel = -4;
-				pongStream.emit('p1V',p1.yVel,p1.y);
+				lobbyTwo.emit('p1V',p1.yVel,p1.y);
 			break;
 			// s key
 			case 83:
@@ -290,7 +290,7 @@ Template.multiplayer.rendered = function(){
 					p1Up = false;
 				}
 				p1.yVel = 4;
-				pongStream.emit('p1V',p1.yVel,p1.y);
+				lobbyTwo.emit('p1V',p1.yVel,p1.y);
 			break;
 			// up arrow
 			case 38:
@@ -299,7 +299,7 @@ Template.multiplayer.rendered = function(){
 					p2Down = false;
 				}
 				p2.yVel = -4;
-				pongStream.emit('p2V',p2.yVel,p2.y);
+				lobbyTwo.emit('p2V',p2.yVel,p2.y);
 			break;
 			// down arrow
 			case 40:
@@ -308,7 +308,7 @@ Template.multiplayer.rendered = function(){
 					p2Up = false;
 				}
 				p2.yVel = 4;
-				pongStream.emit('p2V',p2.yVel,p2.y);
+				lobbyTwo.emit('p2V',p2.yVel,p2.y);
 			break;
 		}
 	}
@@ -318,22 +318,22 @@ Template.multiplayer.rendered = function(){
 			// w key
 			case 87:
 				p1.yVel = 0;
-				pongStream.emit('p1V',p1.yVel,p1.y);
+				lobbyTwo.emit('p1V',p1.yVel,p1.y);
 			break;
 			// s key
 			case 83:
 				p1.yVel = 0;
-				pongStream.emit('p1V',p1.yVel,p1.y);
+				lobbyTwo.emit('p1V',p1.yVel,p1.y);
 			break;
 				// up arrow
 			case 38:
 				p2.yVel = 0;
-				pongStream.emit('p2V',p2.yVel,p2.y);
+				lobbyTwo.emit('p2V',p2.yVel,p2.y);
 			break;
 			// down arrow
 			case 40:
 				p2.yVel = 0;
-				pongStream.emit('p2V',p2.yVel,p2.y);
+				lobbyTwo.emit('p2V',p2.yVel,p2.y);
 			break;
 		}
 	}
