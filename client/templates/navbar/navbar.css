@@ -34,9 +34,6 @@ body{
 }
 
 #logout-button{
-	right: -361px;
-	margin-left:620px;
-	margin-top: -189px;
 	position: relative;
 }
 
@@ -53,8 +50,9 @@ body{
 }
 
 .loggedin-as{
-	margin-left: 477px;
-	top: -54px;
-	position: relative;
+	margin-left: -370px;
+    margin-bottom: 20px;
+    top: 18px;
+    position: relative;
 }
 
