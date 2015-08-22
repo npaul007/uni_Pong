@@ -224,6 +224,11 @@ Template.dashboard.rendered = function(){
 			ctx.fillStyle = "red";
 			ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
 
+			// keep paddle in screen
+			if(p1.y < 0){
+				ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
+			}
+
 			// paddle 2
 			ctx.fillStyle = "blue";
 			ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
