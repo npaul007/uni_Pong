@@ -15,7 +15,7 @@ Template.multiplayer.rendered = function(){
 	var play = "Press 'P' to Play!";
 	var win;
 
-	var winningScore = 5;
+	var winningScore = 10;
 
 	on=true;
 
@@ -31,18 +31,18 @@ Template.multiplayer.rendered = function(){
 		this.collision = function(){
 			if(this.x > 330){
 				this.xVel *= -1;
-				p1Score++;
-				restart();
+				p1Score+=1;
 				pongStream.emit('score',p1Score,p2Score);
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+				restart();
 			}
 
 			else if(this.x < 0){
 				this.xVel *= -1;
-				p2Score++;
-				restart();
+				p2Score+=1;
 				pongStream.emit('score',p1Score,p2Score);
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+				restart();
 			}
 
 			else if(this.y < 0){
@@ -81,7 +81,8 @@ Template.multiplayer.rendered = function(){
 		p2.y = p1.y;
 	}
 
-	var ball = new Ball(120,50,3,3,3,2);
+
+	var ball = new Ball(120,50,3,3,4,2);
 	var p1 = new Paddle(5,60,0,0);
 	var p2 = new Paddle(285,60,0,0);
 
@@ -163,7 +164,7 @@ Template.multiplayer.rendered = function(){
 				play=" ";
 
 				ctx.font = "23px Consolas";
-				ctx.fillText(win,45,100);
+				ctx.fillText(win,101,70);
 
 				//Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.losses":1}});
 				on = false;
@@ -181,7 +182,7 @@ Template.multiplayer.rendered = function(){
 				win = "You Win!";
 
 				ctx.font = "23px Consolas";
-				ctx.fillText(win,45,100);
+				ctx.fillText(win,101,70);
 
 				//Meteor.users.update({_id:Meteor.userId()} , {$inc:{"profile.wins":1}});
 				on = false;
@@ -236,6 +237,15 @@ Template.multiplayer.rendered = function(){
 				}
 
 				ball.xVel *= -1;
+				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+				pongStream.on('ball',function(bxVel,byVel,bx,by){
+					if(ball.x != bx || ball.y != by){
+						ball.x - bx;
+						ball.y = by;
+					}
+					ball.xVel = bxVel;
+					ball.yVel = byVel;
+				});
 			}
 		}
 	}
@@ -250,6 +260,15 @@ Template.multiplayer.rendered = function(){
 					ball.yVel = 1;
 				}
 				ball.xVel *= -1;
+				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+				pongStream.on('ball',function(bxVel,byVel,bx,by){
+					if(ball.x != bx || ball.y != by){
+						ball.x - bx;
+						ball.y = by;
+					}
+					ball.xVel = bxVel;
+					ball.yVel = byVel;
+				});
 			}
 		}
 	}
@@ -271,7 +290,7 @@ Template.multiplayer.rendered = function(){
 				if(p1Down){
 					p1Down = false;
 				}
-				p1.yVel = -2;
+				p1.yVel = -4;
 				pongStream.emit('p1V',p1.yVel,p1.y);
 			break;
 			// s key
@@ -280,7 +299,7 @@ Template.multiplayer.rendered = function(){
 				if(p1Up){
 					p1Up = false;
 				}
-				p1.yVel = 2;
+				p1.yVel = 4;
 				pongStream.emit('p1V',p1.yVel,p1.y);
 			break;
 			// up arrow
@@ -289,7 +308,7 @@ Template.multiplayer.rendered = function(){
 				if(p2Down){
 					p2Down = false;
 				}
-				p2.yVel = -2;
+				p2.yVel = -4;
 				pongStream.emit('p2V',p2.yVel,p2.y);
 			break;
 			// down arrow
@@ -298,7 +317,7 @@ Template.multiplayer.rendered = function(){
 				if(p2Up){
 					p2Up = false;
 				}
-				p2.yVel = 2;
+				p2.yVel = 4;
 				pongStream.emit('p2V',p2.yVel,p2.y);
 			break;
 		}
