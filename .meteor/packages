@@ -14,9 +14,8 @@ accounts-ui
 accounts-password
 email
 meteorhacks:npm
-mrt:moment
 
 
-npm-container
 arunoda:streams
 insecure
+autopublish

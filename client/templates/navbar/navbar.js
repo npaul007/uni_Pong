@@ -3,10 +3,10 @@ Template.navbar.events({
 		Meteor.logout();
 		window.location.href='../';
 	},
-	'click #multiplayer-redirect':function(){
-		window.location.href = "../multi";
+	'click #multi-button':function(){
+		window.location.href = "../lobbys";
 	},
-	'click #dashboard-redirect':function(){
+	'click #cpu-button':function(){
 		window.location.href  = "../dash";
 	}
 });
