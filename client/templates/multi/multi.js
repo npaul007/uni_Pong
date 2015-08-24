@@ -34,7 +34,7 @@ Template.multiplayer.rendered = function(){
 				p1Score++;
 				restart();
 				pongStream.emit('score',p1Score,p2Score);
-				pongStream.emit('ball',ball.xVel,ball.x,ball.y);
+				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 			}
 
 			else if(this.x < 0){
@@ -42,15 +42,17 @@ Template.multiplayer.rendered = function(){
 				p2Score++;
 				restart();
 				pongStream.emit('score',p1Score,p2Score);
-				pongStream.emit('ball',ball.xVel,ball.x,ball.y);
+				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 			}
 
 			else if(this.y < 0){
 				this.yVel *= -1;
+				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 			}
 
 			else if(this.y > 150){
 				this.yVel *= -1;
+				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 			}
 		}
 		this.animate = function(){
@@ -79,7 +81,7 @@ Template.multiplayer.rendered = function(){
 		p2.y = p1.y;
 	}
 
-	var ball = new Ball(120,50,3,3,1,.5);
+	var ball = new Ball(120,50,3,3,3,2);
 	var p1 = new Paddle(5,60,0,0);
 	var p2 = new Paddle(285,60,0,0);
 
@@ -119,12 +121,9 @@ Template.multiplayer.rendered = function(){
 				game = bool;
 			});
 
-			pongStream.on('ball',function(bxVel,bx,by){
+			pongStream.on('ball',function(bxVel,byVel,bx,by){
 				ball.xVel = bxVel;
-				if(ball.x != bx && ball.y != by){
-					ball.x = bx;
-					ball.y = by;
-				}
+				ball.yVel = byVel;
 			});
 
 			pongStream.on('p1V',function(p1Vel,p1Y){

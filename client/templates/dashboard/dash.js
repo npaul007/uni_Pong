@@ -89,11 +89,16 @@ Template.dashboard.rendered = function(){
 	var p1 = new Paddle(5,60,0,0);
 	var p2 = new Paddle(288,60,0,0);
 
+	function getContext(){
+		var canvas = document.getElementById('myCanvas');
+		var ctx = canvas.getContext('2d');
+	}
+
 	function actionPerformed(){
 		if(on){
-			var canvas = document.getElementById('myCanvas');
-			var ctx = canvas.getContext('2d');
 			
+			getContext();
+
 			p1.animate();
 			p2.animate();
 
