@@ -134,6 +134,7 @@ Template.multiplayer.rendered = function(){
 			});
 
 			if(game){
+				ball.animate();
 				ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 				pongStream.on('ball',function(bxVel,byVel,bx,by){
@@ -143,7 +144,6 @@ Template.multiplayer.rendered = function(){
 					ball.yVel = byVel;
 				});
 				ball.collision();
-				ball.animate();
 			}
 
 			if(!game){
