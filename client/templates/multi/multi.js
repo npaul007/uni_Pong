@@ -33,7 +33,6 @@ Template.multiplayer.rendered = function(){
 				this.xVel *= -1;
 				p1Score+=1;
 				pongStream.emit('score',p1Score,p2Score);
-				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 				restart();
 			}
 
@@ -41,18 +40,15 @@ Template.multiplayer.rendered = function(){
 				this.xVel *= -1;
 				p2Score+=1;
 				pongStream.emit('score',p1Score,p2Score);
-				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 				restart();
 			}
 
 			else if(this.y < 0){
 				this.yVel *= -1;
-				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 			}
 
 			else if(this.y > 150){
 				this.yVel *= -1;
-				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 			}
 		}
 		this.animate = function(){
@@ -88,6 +84,7 @@ Template.multiplayer.rendered = function(){
 
 	function actionPerformed(){
 		if(on){
+
 			var canvas = document.getElementById('multiCanvas');
 			var ctx = canvas.getContext('2d');
 			
@@ -122,11 +119,6 @@ Template.multiplayer.rendered = function(){
 				game = bool;
 			});
 
-			pongStream.on('ball',function(bxVel,byVel,bx,by){
-				ball.xVel = bxVel;
-				ball.yVel = byVel;
-			});
-
 			pongStream.on('p1V',function(p1Vel,p1Y){
 				p1.yVel = p1Vel;
 				if(p1.y != p1Y){
@@ -142,7 +134,14 @@ Template.multiplayer.rendered = function(){
 			});
 
 			if(game){
-				ball.animate();
+				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
+				pongStream.on('ball',function(bxVel,byVel,bx,by){
+					ball.x = bx;
+					ball.y = by;
+					ball.animate();
+					ball.xVel = bxVel;
+					ball.yVel = byVel;
+				});
 				ball.collision();
 				ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 			}
@@ -239,10 +238,6 @@ Template.multiplayer.rendered = function(){
 				ball.xVel *= -1;
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 				pongStream.on('ball',function(bxVel,byVel,bx,by){
-					if(ball.x != bx || ball.y != by){
-						ball.x - bx;
-						ball.y = by;
-					}
 					ball.xVel = bxVel;
 					ball.yVel = byVel;
 				});
@@ -262,10 +257,6 @@ Template.multiplayer.rendered = function(){
 				ball.xVel *= -1;
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 				pongStream.on('ball',function(bxVel,byVel,bx,by){
-					if(ball.x != bx || ball.y != by){
-						ball.x - bx;
-						ball.y = by;
-					}
 					ball.xVel = bxVel;
 					ball.yVel = byVel;
 				});
