@@ -134,16 +134,18 @@ Template.multiplayer.rendered = function(){
 			});
 
 			if(game){
+				ball.collision();
 				ball.animate();
 				ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 				pongStream.on('ball',function(bxVel,byVel,bx,by){
-					ball.x = bx;
-					ball.y = by;
+					if(ball.x != bx && ball.y != by){
+						ball.x = bx;
+						ball.y = by;
+					}
 					ball.xVel = bxVel;
 					ball.yVel = byVel;
 				});
-				ball.collision();
 			}
 
 			if(!game){
@@ -236,11 +238,7 @@ Template.multiplayer.rendered = function(){
 				}
 
 				ball.xVel *= -1;
-				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
-				pongStream.on('ball',function(bxVel,byVel,bx,by){
-					ball.xVel = bxVel;
-					ball.yVel = byVel;
-				});
+			
 			}
 		}
 	}
@@ -255,11 +253,7 @@ Template.multiplayer.rendered = function(){
 					ball.yVel = 1;
 				}
 				ball.xVel *= -1;
-				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
-				pongStream.on('ball',function(bxVel,byVel,bx,by){
-					ball.xVel = bxVel;
-					ball.yVel = byVel;
-				});
+			
 			}
 		}
 	}
