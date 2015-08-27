@@ -17,7 +17,7 @@ Template.multiplayer.rendered = function(){
 
 	var winningScore = 10;
 
-	on=true;
+	var on = true;
 
 	setTimeout(actionPerformed,25);
 
@@ -139,12 +139,20 @@ Template.multiplayer.rendered = function(){
 				ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 				pongStream.on('ball',function(bxVel,byVel,bx,by){
+					ball.xVel = bxVel;
+					ball.yVel = byVel;
 					if(ball.x != bx && ball.y != by){
 						ball.x = bx;
 						ball.y = by;
+						if(ball.xVel<0)
+							ball.x-=10;
+						else
+							ball.x+=10
+						if(ball.yVel<0)
+							ball.y-=10
+						else
+							ball.y+=10;
 					}
-					ball.xVel = bxVel;
-					ball.yVel = byVel;
 				});
 			}
 
