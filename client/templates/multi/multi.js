@@ -145,13 +145,14 @@ Template.multiplayer.rendered = function(){
 						ball.x = bx;
 						ball.y = by;
 						if(ball.xVel<0)
-							ball.x-=10;
+							ball.x-=2;
 						else
-							ball.x+=10
+							ball.x+=2
+						/*
 						if(ball.yVel<0)
-							ball.y-=10
+							ball.y-=2
 						else
-							ball.y+=10;
+							ball.y+=2;*/
 					}
 				});
 			}
