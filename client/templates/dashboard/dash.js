@@ -25,7 +25,7 @@ Template.dashboard.rendered = function(){
 	var losses;
 	var games;
 
-	var winningScore = 3;
+	var winningScore = 10;
 
 	var on = true;
 
@@ -89,15 +89,11 @@ Template.dashboard.rendered = function(){
 	var p1 = new Paddle(5,60,0,0);
 	var p2 = new Paddle(288,60,0,0);
 
-	function getContext(){
-		var canvas = document.getElementById('myCanvas');
-		var ctx = canvas.getContext('2d');
-	}
-
 	function actionPerformed(){
 		if(on){
 			
-			getContext();
+			var canvas = document.getElementById('myCanvas');
+			var ctx = canvas.getContext('2d');
 
 			p1.animate();
 			p2.animate();
@@ -277,6 +273,10 @@ Template.dashboard.rendered = function(){
 				}
 
 				ball.xVel *= -1;
+				if(ball.xVel<0)
+					ball.xVel-=.5;
+				else
+					ball.xVel+=.5;
 			}
 		}
 
@@ -294,6 +294,10 @@ Template.dashboard.rendered = function(){
 				}
 
 				ball.xVel *= -1;
+				if(ball.xVel<0)
+					ball.xVel-=.5;
+				else
+					ball.xVel+=.5;
 			}
 		}
 	}

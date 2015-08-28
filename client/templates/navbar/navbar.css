@@ -10,7 +10,7 @@
 	border-top: 2px solid white;
 	border-bottom: 2px solid white;
 	background: black;
-	padding: 15px;
+	padding: 30px;
 }
 
 h1,h2,h3,p,li,label,a{
@@ -34,7 +34,8 @@ body{
 }
 
 #logout-button{
-	position: relative;
+	position: fixed;
+	right:-25px;
 }
 
 #multi-button{
@@ -50,7 +51,7 @@ body{
 }
 
 .loggedin-as{
-	margin-left: -370px;
+	margin-left: -300px;
     margin-bottom: 20px;
     top: 18px;
     position: relative;
