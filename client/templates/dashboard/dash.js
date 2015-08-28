@@ -83,6 +83,14 @@ Template.dashboard.rendered = function(){
 		ball.y =  50;
 		p1.y = 60;
 		p2.y = p1.y;
+		if(ball.xVel<0)
+			ball.xVel = -2;
+		else
+			ball.xVel = 2
+		if(ball.yVel < 0)
+			ball.yVel = -1;
+		else
+			ball.yVel = 1;
 	}
 
 	var ball = new Ball(120,50,3,3,2,1);
