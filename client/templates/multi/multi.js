@@ -142,17 +142,18 @@ Template.multiplayer.rendered = function(){
 					ball.xVel = bxVel;
 					ball.yVel = byVel;
 					if(ball.x != bx && ball.y != by){
-						ball.x = bx;
-						ball.y = by;
 						if(ball.xVel<0)
-							ball.x-=2;
+							ball.x-=4;
 						else
-							ball.x+=2;
+							ball.x+=4;
 						
 						if(ball.yVel<0)
-							ball.y-=1;
+							ball.y-=2;
 						else
-							ball.y+=1;
+							ball.y+=2;
+
+						ball.x = bx;
+						ball.y = by;
 					}
 				});
 			}
@@ -170,7 +171,7 @@ Template.multiplayer.rendered = function(){
 				ctx.fillText(p1Score.toString(),100,20);
 				ctx.fillText(p2Score.toString(),200,20);
 
-				win = "You Lose!";
+				win = "Game Over";
 				play=" ";
 
 				ctx.font = "23px Consolas";
@@ -189,7 +190,7 @@ Template.multiplayer.rendered = function(){
 				ctx.fillText(p2Score.toString(),200,20);
 				
 				play=" ";
-				win = "You Win!";
+				win = "Game Over";
 
 				ctx.font = "23px Consolas";
 				ctx.fillText(win,101,70);
