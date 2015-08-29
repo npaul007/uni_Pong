@@ -214,7 +214,11 @@ Template.dashboard.rendered = function(){
 				}
 
 				else{
-					p2.yVel = -1;
+					p2.yVel = -2;
+					if(p2Down){
+						p2Up = true;
+						p2Down = false;
+					}
 				}
 			}
 			// moves paddle down to catch ball
@@ -225,7 +229,11 @@ Template.dashboard.rendered = function(){
 				}
 
 				else{
-					p2.yVel = 1;
+					p2.yVel = 2;
+					if(p2Up){
+						p2Down = true;
+						p2Up = false;
+					}
 				}
 			}
 
@@ -281,6 +289,7 @@ Template.dashboard.rendered = function(){
 				}
 
 				ball.xVel *= -1;
+				
 				if(ball.xVel<0)
 					ball.xVel-=.5;
 				else
@@ -302,6 +311,7 @@ Template.dashboard.rendered = function(){
 				}
 
 				ball.xVel *= -1;
+
 				if(ball.xVel<0)
 					ball.xVel-=.5;
 				else
