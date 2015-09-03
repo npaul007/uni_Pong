@@ -34,7 +34,7 @@ body{
 }
 
 #logout-button{
-	position: fixed;
+	position: relative;
 	right:-25px;
 }
 
@@ -51,7 +51,7 @@ body{
 }
 
 .loggedin-as{
-	margin-left: -300px;
+	margin-left: -265px;
     margin-bottom: 20px;
     top: 18px;
     position: relative;

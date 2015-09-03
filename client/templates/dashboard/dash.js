@@ -214,7 +214,7 @@ Template.dashboard.rendered = function(){
 				}
 
 				else{
-					p2.yVel = -2;
+					p2.yVel = -1.8;
 					if(p2Down){
 						p2Up = true;
 						p2Down = false;
@@ -291,9 +291,9 @@ Template.dashboard.rendered = function(){
 				ball.xVel *= -1;
 				
 				if(ball.xVel<0)
-					ball.xVel-=.5;
+					ball.xVel-=.25;
 				else
-					ball.xVel+=.5;
+					ball.xVel+=.25;
 			}
 		}
 
@@ -313,9 +313,9 @@ Template.dashboard.rendered = function(){
 				ball.xVel *= -1;
 
 				if(ball.xVel<0)
-					ball.xVel-=.5;
+					ball.xVel-=.25;
 				else
-					ball.xVel+=.5;
+					ball.xVel+=.25;
 			}
 		}
 	}
