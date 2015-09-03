@@ -229,7 +229,7 @@ Template.dashboard.rendered = function(){
 				}
 
 				else{
-					p2.yVel = 2;
+					p2.yVel = 1.8;
 					if(p2Up){
 						p2Down = true;
 						p2Up = false;
