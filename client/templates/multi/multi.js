@@ -146,10 +146,6 @@ Template.multiplayer.rendered = function(){
 							ball.x-=4;
 						else
 							ball.x+=4;
-
-						
-						ball.x = bx;
-						ball.y = by;
 						
 						if(ball.yVel<0)
 							ball.y-=2;
