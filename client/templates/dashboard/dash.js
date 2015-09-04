@@ -29,6 +29,17 @@ Template.dashboard.rendered = function(){
 
 	var on = true;
 
+	var tnormal = document.getElementById('tnormal');
+	var tup = document.getElementById('tup');
+	var tdown = document.getElementById('tdown');
+	var tkickup = document.getElementById('tkup');
+	var tkickdown = document.getElementById('tkdown');
+
+	var kup = false;
+	var kdown = false;
+
+	var switchSpriteCounter = 0;
+
 	setTimeout(actionPerformed,10);
 
 	function Ball(x,y,width,height,xVel,yVel){
@@ -81,12 +92,15 @@ Template.dashboard.rendered = function(){
 	function restart(){
 		ball.x = 120;
 		ball.y =  50;
+
 		p1.y = 60;
 		p2.y = p1.y;
+
 		if(ball.xVel<0)
 			ball.xVel = -2;
 		else
 			ball.xVel = 2
+
 		if(ball.yVel < 0)
 			ball.yVel = -1;
 		else
@@ -96,6 +110,9 @@ Template.dashboard.rendered = function(){
 	var ball = new Ball(120,50,3,3,2,1);
 	var p1 = new Paddle(5,60,0,0);
 	var p2 = new Paddle(288,60,0,0);
+
+	p1.width = 35;
+	p1.height = 40;
 
 	function actionPerformed(){
 		if(on){
@@ -132,15 +149,15 @@ Template.dashboard.rendered = function(){
 				if(!leaderboardShown){
 					ctx.fillStyle = "white";
 					ctx.font = "9px Consolas";
-					ctx.fillText(play,49,60);
+					ctx.fillText(play,70,60);
 					ctx.fillStyle = "orange";
-					ctx.fillText("Press W to move up ",49,75);
+					ctx.fillText("Press W to move up ",70,75);
 					ctx.fillStyle = "yellow";
-					ctx.fillText("Press S to move down ",49,90);
+					ctx.fillText("Press S to move down ",70,90);
 					ctx.fillStyle = "pink";
-					ctx.fillText("Press R to restart the game ",49,105);
+					ctx.fillText("Press R to restart the game ",70,105);
 					ctx.fillStyle = "cyan";
-					ctx.fillText("Press L to check out the leaderboard ",49,120);
+					ctx.fillText("Press L to check out the leaderboard ",70,120);
 				}
 			}
 
@@ -239,13 +256,25 @@ Template.dashboard.rendered = function(){
 
 			// paddle 1
 			ctx.fillStyle = "red";
-			ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
 
-			// keep paddle in screen
-			if(p1.y < 0){
-				ctx.fillRect(p1.x,p1.y,p1.width,p1.height);
+			switch(switchSpriteCounter){
+				case 0:
+					ctx.drawImage(tnormal,p1.x,p1.y,p1.width,p1.height);
+				break;
+				case 1:
+					ctx.drawImage(tup,p1.x,p1.y,p1.width,p1.height);
+				break;
+				case 2:
+					ctx.drawImage(tdown,p1.x,p1.y,p1.width,p1.height);
+				break;
+				case 3:
+					ctx.drawImage(tkickup,p1.x,p1.y,p1.width,p1.height);
+				break;
+				case 4:
+					ctx.drawImage(tkickdown,p1.x,p1.y,p1.width,p1.height);
+				break;
 			}
-
+	
 			// paddle 2
 			ctx.fillStyle = "blue";
 			ctx.fillRect(p2.x,p2.y,p2.width,p2.height);
@@ -282,10 +311,12 @@ Template.dashboard.rendered = function(){
 			if(ball.y >= p1.y && ball.y <= p1.height+p1.y){
 				if(p1Up){
 					ball.yVel = -1;
+					switchSpriteCounter = 3;
 				}
 
 				else if(p1Down){
 					ball.yVel = 1;
+					switchSpriteCounter = 4;
 				}
 
 				ball.xVel *= -1;
@@ -365,6 +396,7 @@ Template.dashboard.rendered = function(){
 				if(p1Down){
 					p1Down = false;
 				}
+				switchSpriteCounter = 1;
 				p1.yVel = -2
 			break;
 
@@ -374,6 +406,7 @@ Template.dashboard.rendered = function(){
 				if(p1Up){
 					p1Up = false;
 				}
+				switchSpriteCounter = 2;
 				p1.yVel = 2
 			break;
 
@@ -401,22 +434,24 @@ Template.dashboard.rendered = function(){
 		switch(event.keyCode){
 			// w key
 			case 87:
-				p1.yVel = 0
+				p1.yVel = 0;
+				switchSpriteCounter = 0;
 			break;
 
 			// s key
 			case 83:
-				p1.yVel = 0
+				p1.yVel = 0;
+				switchSpriteCounter = 0;
 			break;
 
 			// up arrow
 			case 38:
-				p2.yVel = 0
+				p2.yVel = 0;
 			break;
 
 			// down arrow
 			case 40:
-				p2.yVel = 0
+				p2.yVel = 0;
 			break;
 		}
 	}
