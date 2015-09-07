@@ -151,13 +151,13 @@ Template.dashboard.rendered = function(){
 					ctx.font = "9px Consolas";
 					ctx.fillText(play,70,60);
 					ctx.fillStyle = "orange";
-					ctx.fillText("Press W to move up ",70,75);
+					ctx.fillText("Press 'W' to move up ",70,75);
 					ctx.fillStyle = "yellow";
-					ctx.fillText("Press S to move down ",70,90);
+					ctx.fillText("Press 'S' to move down ",70,90);
 					ctx.fillStyle = "pink";
-					ctx.fillText("Press R to restart the game ",70,105);
+					ctx.fillText("Press 'R' to restart the game ",70,105);
 					ctx.fillStyle = "cyan";
-					ctx.fillText("Press L to check out the leaderboard ",70,120);
+					ctx.fillText("Press 'L' to check out the leaderboard ",70,120);
 				}
 			}
 
