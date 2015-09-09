@@ -35,13 +35,7 @@ body{
 
 #logout-button{
 	position: relative;
-	right:-25px;
-}
-
-#multi-button{
-	position: relative;
-	top: -55px;
-    right: -192px;
+	bottom: -10px;
 }
 
 #cpu-button{
@@ -51,9 +45,6 @@ body{
 }
 
 .loggedin-as{
-	margin-left: -265px;
-    margin-bottom: 20px;
-    top: 18px;
-    position: relative;
+	color: white;
 }
 
