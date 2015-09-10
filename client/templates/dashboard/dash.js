@@ -128,14 +128,16 @@ Template.dashboard.rendered = function(){
 
 			ctx.clearRect(0,0,canvas.width,canvas.height);
 
-			ctx.fillStyle = "white";
+
 
 			if(!leaderboardShown){
+				ctx.fillStyle = "white";
 				ctx.font = "23px Consolas";
 				ctx.fillText(p1Score.toString(),100,20);
 				ctx.fillText(p2Score.toString(),200,20);
 			}
 
+			ctx.fillStyle = "white";
 			ctx.font = "10px Consolas";
 		
 			ctx.fillText("You",20,20);
@@ -148,19 +150,21 @@ Template.dashboard.rendered = function(){
 				ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 			}
 
+
 			if(!game){
 				if(!leaderboardShown){
-					ctx.fillStyle = "white";
 					ctx.font = "9px Consolas";
-					ctx.fillText(play,70,60);
+					ctx.fillText(play,70,45);
 					ctx.fillStyle = "orange";
-					ctx.fillText("Press 'W' to move up ",70,75);
+					ctx.fillText("Press 'W' to move up ",70,60);
 					ctx.fillStyle = "yellow";
-					ctx.fillText("Press 'S' to move down ",70,90);
+					ctx.fillText("Press 'S' to move down ",70,75);
 					ctx.fillStyle = "pink";
-					ctx.fillText("Press 'R' to restart the game ",70,105);
+					ctx.fillText("Press 'R' to restart the game ",70,90);
 					ctx.fillStyle = "cyan";
-					ctx.fillText("Press 'L' to check out the leaderboard ",70,120);
+					ctx.fillText("Press 'L' to check out the leaderboard ",70,105);
+					ctx.fillStyle="red";
+					ctx.fillText("Press 'C' to choose a paddle or character",70,120);
 				}
 			}
 
