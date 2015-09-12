@@ -1,7 +1,7 @@
 Template.login.events({
 	'click .register-link-button':function(event,t){
 		event.preventDefault();
-		window.location.href ='../register'
+		Router.go('register')
 	},
 	'click .login-button':function(event,t){
 		event.preventDefault();
@@ -13,7 +13,7 @@ Template.login.events({
 			if(error){
 				showInvalid();
 			}else{
-				window.location.href= "../dash"
+				Router.go('dashboard');
 			}
 		});
 	}

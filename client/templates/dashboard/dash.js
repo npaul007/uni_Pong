@@ -2,10 +2,6 @@ Template.dashboard.rendered = function(){
 
 	$('.leaderboard').hide();
 
-	if(!Meteor.userId()){
-		window.location.href = "../"
-	}
-
 	var game = false;
 	var leaderboardShown = false;
 
@@ -127,8 +123,6 @@ Template.dashboard.rendered = function(){
 			p2Collsion();
 
 			ctx.clearRect(0,0,canvas.width,canvas.height);
-
-
 
 			if(!leaderboardShown){
 				ctx.fillStyle = "white";
