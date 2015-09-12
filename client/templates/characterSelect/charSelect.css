@@ -9,8 +9,16 @@
 	padding: 15px;
 }
 
-.image-shell:hover{
-	background: blue;
+#piccolo:hover{
+	background: purple;
+}
+
+#recoome:hover{
+	background: orange;
+}
+
+#tien:hover{
+	background: green;
 }
 
 #charSel{
