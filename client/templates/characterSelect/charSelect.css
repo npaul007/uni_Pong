@@ -1,0 +1,19 @@
+.char-pics{
+	width: 150px;
+	width: 150px;
+}
+
+.image-shell{
+	display: inline-block;
+	border: 5px solid white;
+	padding: 15px;
+}
+
+.image-shell:hover{
+	background: blue;
+}
+
+#charSel{
+	position: relative;
+	top: -400px;
+}
