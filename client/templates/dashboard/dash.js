@@ -506,7 +506,7 @@ Template.dashboard.rendered = function(){
 		 up = getId('rup');
 		 down = getId('rdown');
 		 kickup = getId('rkup');
-		 kickdown = getId('rdown');
+		 kickdown = getId('rkdown');
 	});
 
 }
