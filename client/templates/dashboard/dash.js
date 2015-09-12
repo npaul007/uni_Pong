@@ -27,11 +27,11 @@ Template.dashboard.rendered = function(){
 
 	var on = true;
 
-	var tnormal = document.getElementById('tnormal');
-	var tup = document.getElementById('tup');
-	var tdown = document.getElementById('tdown');
-	var tkickup = document.getElementById('tkup');
-	var tkickdown = document.getElementById('tkdown');
+	var normal = document.getElementById('tnormal');
+	var up = document.getElementById('tup');
+	var down = document.getElementById('tdown');
+	var kickup = document.getElementById('tkup');
+	var kickdown = document.getElementById('tkdown');
 
 	var kup = false;
 	var kdown = false;
@@ -268,19 +268,19 @@ Template.dashboard.rendered = function(){
 
 			switch(switchSpriteCounter){
 				case 0:
-					ctx.drawImage(tnormal,p1.x,p1.y,p1.width,p1.height);
+					ctx.drawImage(normal,p1.x,p1.y,p1.width,p1.height);
 				break;
 				case 1:
-					ctx.drawImage(tup,p1.x,p1.y,p1.width,p1.height);
+					ctx.drawImage(up,p1.x,p1.y,p1.width,p1.height);
 				break;
 				case 2:
-					ctx.drawImage(tdown,p1.x,p1.y,p1.width,p1.height);
+					ctx.drawImage(down,p1.x,p1.y,p1.width,p1.height);
 				break;
 				case 3:
-					ctx.drawImage(tkickup,p1.x,p1.y,p1.width,p1.height);
+					ctx.drawImage(kickup,p1.x,p1.y,p1.width,p1.height);
 				break;
 				case 4:
-					ctx.drawImage(tkickdown,p1.x,p1.y,p1.width,p1.height);
+					ctx.drawImage(kickdown,p1.x,p1.y,p1.width,p1.height);
 				break;
 			}
 	
@@ -364,26 +364,28 @@ Template.dashboard.rendered = function(){
 		switch(event.keyCode){
 			// l leaderboard
 			case 76:
-				if(leaderboardShown || charSelectShown){
+				if(leaderboardShown){
 					leaderboardShown = false;
 				}else{
 					if(game){
 						leaderboardShown = false;
 					}else{
 						leaderboardShown = true;
+						charSelectShown = false;
 					}
 				}
 			break;
 
 			//c character select
 			case 67:
-				if(charSelectShown || leaderboardShown){
+				if(charSelectShown){
 					charSelectShown  = false;
 				}else{
 					if(game){
 						charSelectShown = false;
 					}else{
 						charSelectShown = true;
+						leaderboardShown = false;
 					}
 				}
 			break;
