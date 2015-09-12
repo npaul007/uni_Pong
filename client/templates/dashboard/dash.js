@@ -1,9 +1,11 @@
 Template.dashboard.rendered = function(){
 
 	$('.leaderboard').hide();
+	$('#charSel').hide();
 
 	var game = false;
 	var leaderboardShown = false;
+	var charSelectShown = false;
 
 	var p1Up = false;
 	var p1Down = false;
@@ -146,7 +148,7 @@ Template.dashboard.rendered = function(){
 
 
 			if(!game){
-				if(!leaderboardShown){
+				if(!leaderboardShown && !charSelectShown){
 					ctx.font = "9px Consolas";
 					ctx.fillText(play,70,45);
 					ctx.fillStyle = "orange";
@@ -222,6 +224,12 @@ Template.dashboard.rendered = function(){
 				$('.leaderboard').show();
 			}else{
 				$('.leaderboard').hide();
+			}
+
+			if(charSelectShown){
+				$('#charSel').show();
+			}else{
+				$('#charSel').hide();
 			}
 
 			// moves cpu paddle up to catch ball
@@ -356,13 +364,26 @@ Template.dashboard.rendered = function(){
 		switch(event.keyCode){
 			// l leaderboard
 			case 76:
-				if(leaderboardShown){
+				if(leaderboardShown || charSelectShown){
 					leaderboardShown = false;
 				}else{
 					if(game){
 						leaderboardShown = false;
 					}else{
 						leaderboardShown = true;
+					}
+				}
+			break;
+
+			//c character select
+			case 67:
+				if(charSelectShown || leaderboardShown){
+					charSelectShown  = false;
+				}else{
+					if(game){
+						charSelectShown = false;
+					}else{
+						charSelectShown = true;
 					}
 				}
 			break;
@@ -388,6 +409,7 @@ Template.dashboard.rendered = function(){
 			}else{
 				game = true;
 				leaderboardShown = false;
+				charSelectShown = false;
 			}
 			break;
 
