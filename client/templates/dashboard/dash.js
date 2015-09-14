@@ -327,6 +327,30 @@ Template.dashboard.rendered = function(){
 
 	}
 
+	$('#piccolo').click(function(){
+		 normal = getId('pnormal');
+		 up = getId('pup');
+		 down = getId('pdown');
+		 kickup = getId('pkup');
+		 kickdown = getId('pkdown');
+	});
+
+	$('#recoome').click(function(){
+		 normal = getId('rnormal');
+		 up = getId('rup');
+		 down = getId('rdown');
+		 kickup = getId('rkup');
+		 kickdown = getId('rkdown');
+	});
+
+	$('#tien').click(function(){
+		 normal = getId('tnormal');
+		 up = getId('tup');
+		 down = getId('tdown');
+		 kickup = getId('tkup');
+		 kickdown = getId('tkdown');
+	});
+
 	function p1Collsion(){
 		if(ball.x < p1.x){
 			if(ball.y >= p1.y && ball.y <= p1.height+p1.y){
@@ -492,22 +516,6 @@ Template.dashboard.rendered = function(){
 			break;
 		}
 	}
-
-	$('#piccolo').click(function(){
-		 normal = getId('pnormal');
-		 up = getId('pup');
-		 down = getId('pdown');
-		 kickup = getId('pkup');
-		 kickdown = getId('pkdown');
-	});
-
-	$('#recoome').click(function(){
-		 normal = getId('rnormal');
-		 up = getId('rup');
-		 down = getId('rdown');
-		 kickup = getId('rkup');
-		 kickdown = getId('rkdown');
-	});
 
 }
 
