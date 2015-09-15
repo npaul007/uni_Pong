@@ -27,7 +27,7 @@ Template.dashboard.rendered = function(){
 
 	var on = true;
 
-	var normal = document.getElementById('tnormal');
+	var normal = getId('tnormal');
 	var up = document.getElementById('tup');
 	var down = document.getElementById('tdown');
 	var kickup = document.getElementById('tkup');
@@ -112,11 +112,23 @@ Template.dashboard.rendered = function(){
 	p1.width = 35;
 	p1.height = 40;
 
+	function getCtx(canvas){
+		return canvas.getContext('2d');
+	}
+
+	function getId(id){
+		return document.getElementById(id);
+	}
+
+	function setColor(color){
+		ctx.fillStyle = color;
+	}
+
 	function actionPerformed(){
 		if(on){
 			
-			var canvas = document.getElementById('myCanvas');
-			var ctx = canvas.getContext('2d');
+			var canvas = getId('myCanvas');
+			var ctx = getCtx(canvas);
 
 			p1.animate();
 			p2.animate();
@@ -126,7 +138,7 @@ Template.dashboard.rendered = function(){
 
 			ctx.clearRect(0,0,canvas.width,canvas.height);
 
-			if(!leaderboardShown){
+			if(!leaderboardShown && !charSelectShown && game){
 				ctx.fillStyle = "white";
 				ctx.font = "23px Consolas";
 				ctx.fillText(p1Score.toString(),100,20);
@@ -315,6 +327,30 @@ Template.dashboard.rendered = function(){
 
 	}
 
+	$('#piccolo').click(function(){
+		 normal = getId('pnormal');
+		 up = getId('pup');
+		 down = getId('pdown');
+		 kickup = getId('pkup');
+		 kickdown = getId('pkdown');
+	});
+
+	$('#recoome').click(function(){
+		 normal = getId('rnormal');
+		 up = getId('rup');
+		 down = getId('rdown');
+		 kickup = getId('rkup');
+		 kickdown = getId('rkdown');
+	});
+
+	$('#tien').click(function(){
+		 normal = getId('tnormal');
+		 up = getId('tup');
+		 down = getId('tdown');
+		 kickup = getId('tkup');
+		 kickdown = getId('tkdown');
+	});
+
 	function p1Collsion(){
 		if(ball.x < p1.x){
 			if(ball.y >= p1.y && ball.y <= p1.height+p1.y){
@@ -481,8 +517,8 @@ Template.dashboard.rendered = function(){
 		}
 	}
 
-
 }
+
 
 
 
