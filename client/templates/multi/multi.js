@@ -139,21 +139,21 @@ Template.multiplayer.rendered = function(){
 				ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 				pongStream.on('ball',function(bxVel,byVel,bx,by){
-					ball.xVel = bxVel;
-					ball.yVel = byVel;
 					if(ball.x != bx && ball.y != by){
-						if(ball.xVel<0)
-							ball.x-=4;
-						else
-							ball.x+=4;
-						
-						if(ball.yVel<0)
-							ball.y-=2;
-						else
-							ball.y+=2;
-
+						if(ball.xVel<0){
+							ball.x-=4.5;
+						}
+						else if(ball.yVel<0){
+							ball.y-=2.5;
+						}
+						else{
+							ball.y+=2.5;
+							ball.x+=4.5;
+						}
 						ball.x = bx;
 						ball.y = by;
+						ball.xVel = bxVel;
+						ball.yVel = byVel;
 					}
 				});
 			}
