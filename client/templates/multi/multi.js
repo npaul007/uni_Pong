@@ -133,23 +133,22 @@ Template.multiplayer.rendered = function(){
 				}
 			});
 
-			ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
-
 			if(game){
 				ball.collision();
 				ball.animate();
+				ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 				pongStream.on('ball',function(bxVel,byVel,bx,by){
 					if(ball.x != bx && ball.y != by){
 						if(ball.xVel<0){
-							ball.x-=4.4;
+							ball.x-=4.55;
 						}
 						if(ball.yVel<0){
-							ball.y-=2.4;
+							ball.y-=2.45;
 						}
 						else{
-							ball.y+=2.4;
-							ball.x+=4.4;
+							ball.y+=2.45;
+							ball.x+=4.55;
 						}
 						ball.animate();
 						ball.x = bx;
