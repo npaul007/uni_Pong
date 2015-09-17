@@ -19,7 +19,7 @@ Template.multiplayer.rendered = function(){
 
 	var on = true;
 
-	setTimeout(actionPerformed,25);
+	setTimeout(actionPerformed,30);
 
 	function Ball(x,y,width,height,xVel,yVel){
 		this.x = x;
@@ -141,19 +141,20 @@ Template.multiplayer.rendered = function(){
 				pongStream.on('ball',function(bxVel,byVel,bx,by){
 					if(ball.x != bx && ball.y != by){
 						if(ball.xVel<0){
-							ball.x-=4.5;
+							ball.x-=4.2;
 						}
-						else if(ball.yVel<0){
-							ball.y-=2.5;
+						if(ball.yVel<0){
+							ball.y-=2.2;
 						}
 						else{
-							ball.y+=2.5;
-							ball.x+=4.5;
+							ball.y+=2.2;
+							ball.x+=4.2;
 						}
 						ball.x = bx;
 						ball.y = by;
 						ball.xVel = bxVel;
 						ball.yVel = byVel;
+						ball.animate();
 					}
 				});
 			}
@@ -231,7 +232,7 @@ Template.multiplayer.rendered = function(){
 		
 		}
 
-		setTimeout(actionPerformed,25);
+		setTimeout(actionPerformed,30);
 		
 
 	}
