@@ -19,7 +19,7 @@ Template.multiplayer.rendered = function(){
 
 	var on = true;
 
-	setTimeout(actionPerformed,25);
+	setTimeout(actionPerformed,30);
 
 	function Ball(x,y,width,height,xVel,yVel){
 		this.x = x;
@@ -133,27 +133,29 @@ Template.multiplayer.rendered = function(){
 				}
 			});
 
+			ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
+
 			if(game){
 				ball.collision();
 				ball.animate();
-				ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 				pongStream.emit('ball',ball.xVel,ball.yVel,ball.x,ball.y);
 				pongStream.on('ball',function(bxVel,byVel,bx,by){
-					ball.xVel = bxVel;
-					ball.yVel = byVel;
 					if(ball.x != bx && ball.y != by){
-						if(ball.xVel<0)
-							ball.x-=4;
-						else
-							ball.x+=4;
-						
-						if(ball.yVel<0)
-							ball.y-=2;
-						else
-							ball.y+=2;
-
+						if(ball.xVel<0){
+							ball.x-=4.55;
+						}
+						if(ball.yVel<0){
+							ball.y-=2.45;
+						}
+						else{
+							ball.y+=2.45;
+							ball.x+=4.55;
+						}
+						ball.animate();
 						ball.x = bx;
 						ball.y = by;
+						ball.xVel = bxVel;
+						ball.yVel = byVel;
 					}
 				});
 			}
@@ -231,7 +233,7 @@ Template.multiplayer.rendered = function(){
 		
 		}
 
-		setTimeout(actionPerformed,25);
+		setTimeout(actionPerformed,30);
 		
 
 	}
