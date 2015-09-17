@@ -150,11 +150,11 @@ Template.multiplayer.rendered = function(){
 							ball.y+=2.2;
 							ball.x+=4.2;
 						}
+						ball.animate();
 						ball.x = bx;
 						ball.y = by;
 						ball.xVel = bxVel;
 						ball.yVel = byVel;
-						ball.animate();
 					}
 				});
 			}
