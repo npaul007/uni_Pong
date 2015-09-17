@@ -1,7 +1,4 @@
-
-#rights-div{
-	position: fixed;
-	text-align: center;
-	margin-left: 470px;
-	bottom: -13px;
+footer{
+	position: relative;
+	margin-top: -20px;
 }

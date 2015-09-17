@@ -1,7 +1,5 @@
 .leaderboard{
-	position: relative;
-	top: -500px;
-	right: -20px;
+	margin-bottom: -500px;
 }
 
 .block{

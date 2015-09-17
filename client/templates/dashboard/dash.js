@@ -158,7 +158,6 @@ Template.dashboard.rendered = function(){
 				ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
 			}
 
-
 			if(!game){
 				if(!leaderboardShown && !charSelectShown){
 					ctx.font = "9px Consolas";
