@@ -233,7 +233,6 @@ Template.dashboard.rendered = function(){
 
 			if(leaderboardShown){
 				$('.leaderboard').show();
-				$('.footer').css('margin-top','480px');
 			}else{
 				$('.leaderboard').hide();
 			}
@@ -401,7 +400,6 @@ Template.dashboard.rendered = function(){
 			// l leaderboard
 			case 76:
 				if(leaderboardShown){
-					$('.footer').css('margin-top','');
 					leaderboardShown = false;
 				}else{
 					if(game){
