@@ -1,8 +1,13 @@
 .leaderboard{
 	position: relative;
+<<<<<<< HEAD
 	top: -500px;
 	margin-right: auto;
 	margin-left: auto;
+=======
+	top: -480px;
+	right: -20px;
+>>>>>>> dev
 }
 
 .block{
