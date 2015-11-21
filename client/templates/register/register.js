@@ -1,15 +1,15 @@
 Template.register.events({
-	'click .registration-submit-button':function(event,t){
+	'click .registration-submit-button':function(event){
 		event.preventDefault();
 
 		var sent = false;
 
-		var email = t.find('#email').value;
-		var password = t.find('#password').value;
-		var nickname = t.find('#nickname').value;
+		var email = $('#email').val();
+		var password = $('#password').val();
+		var nickname = $('#nickname').val();
 
 		Accounts.createUser({
-			email:email,
+			username:email,
 			password:password,
 			profile:{
 				nickname:nickname,
@@ -28,7 +28,3 @@ Template.register.events({
 		}
 	}
 });
-
-Template.register.rendered = function(){
-
-}

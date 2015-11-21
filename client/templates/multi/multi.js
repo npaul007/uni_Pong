@@ -29,7 +29,7 @@ Template.multiplayer.rendered = function(){
 		this.xVel = xVel;
 		this.yVel = yVel;
 		this.collision = function(){
-			if(this.x > 330){
+			if(this.x > 340){
 				this.xVel *= -1;
 				p1Score+=1;
 				pongStream.emit('score',p1Score,p2Score);

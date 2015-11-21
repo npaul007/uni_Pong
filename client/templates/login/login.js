@@ -3,16 +3,18 @@ Template.login.events({
 		event.preventDefault();
 		Router.go('register')
 	},
-	'click .login-button':function(event,t){
+	'click .login-button':function(event){
 		event.preventDefault();
 
-		var email = t.find('#email').value;
-		var password = t.find('#password').value;
+		var email = $('#email').val();
+		var password = $('#password').val();
 
 		Meteor.loginWithPassword(email,password,function(error){
 			if(error){
 				showInvalid();
+				console.log(error);
 			}else{
+				hideInvalid();
 				Router.go('dashboard');
 			}
 		});
@@ -22,6 +24,11 @@ Template.login.events({
 function showInvalid(){
 	var invalid = $('#invalid');
 	invalid.show();
+}
+
+function hideInvalid(){
+	var invalid = $('#invalid');
+	invalid.hide();
 }
 
 Template.login.rendered = function(){

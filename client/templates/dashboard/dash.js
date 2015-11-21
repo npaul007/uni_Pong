@@ -201,6 +201,7 @@ Template.dashboard.rendered = function(){
 
 				on = false;
 				game = false;
+				location.reload(true);
 			}
 
 			if(p1Score === winningScore){
@@ -229,6 +230,7 @@ Template.dashboard.rendered = function(){
 
 				on = false;
 				game = false;
+				location.reload(true);
 			}
 
 			if(leaderboardShown){
@@ -251,7 +253,7 @@ Template.dashboard.rendered = function(){
 				}
 
 				else{
-					p2.yVel = -1.8;
+					p2.yVel = -1.2;
 					if(p2Down){
 						p2Up = true;
 						p2Down = false;
@@ -266,7 +268,7 @@ Template.dashboard.rendered = function(){
 				}
 
 				else{
-					p2.yVel = 1.8;
+					p2.yVel = 1.2;
 					if(p2Up){
 						p2Down = true;
 						p2Up = false;
