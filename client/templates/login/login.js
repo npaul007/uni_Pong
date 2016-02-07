@@ -32,5 +32,7 @@ function hideInvalid(){
 }
 
 Template.login.rendered = function(){
-	Meteor.logout();
+	if(Meteor.userId()){
+		Router.go('/dash');
+	}
 }
