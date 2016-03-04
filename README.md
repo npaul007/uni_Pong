@@ -1,3 +1,2 @@
 #Uni Pong
-Online Meteor and Javascript based version of  Pong.
-http://unipong.meteor.com
+Hosted at http://unipong.meteor.com
