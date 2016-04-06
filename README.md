@@ -1,2 +1,3 @@
 #Uni Pong
-Hosted at http://unipong.meteor.com
+Pong in pure javascript
+
