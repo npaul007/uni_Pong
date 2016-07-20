@@ -1,3 +1,5 @@
 #Uni Pong
-Online Meteor and Javascript based version of  Pong.
-http://unipong.meteor.com
+Pong in pure javascript
+
+Try it out! <br/>
+http://unipong.herokuapp.com/dash
